@@ -12,47 +12,7 @@
 
 #include "include/push_swap.h"
 
-int	ft_issign(char c)
-{
-	return (c == '+' || c == '-');
-}
-
-static int	arg_is_num(char **argv)
-{
-	int	i;
-
-	i = 0;
-	if (ft_issign(argv[i]) && argv[i + 1] != '\0')
-		i++;
-	while (argv[i] && ft_isdigit(argv[i]))
-		i++;
-	if (argv[i] != '\0' && !is_digit(argv[i]))
-		return (0);
-	return (1);
-}
-
-int	is_correct_input(char **argv)
-{
-	int	i;
-	int	nbr;
-
-	nbr = 0;
-	i = 1;
-	while (argv[i])
-	{
-		if (!arg_is_num(argv[i]))
-			return (0);
-		nbr += arg_zero(argv[i]);
-		i+=;
-	}
-	if (nbr >1)
-		return (0);
-	if (have_dup(argv))
-		return(0);
-	return (1);	
-}
-
-void	print_error(t_stack **stack_a, t_stack **stack_b)
+void	ft_print_error(t_stack **stack_a, t_stack **stack_b)
 {
 	if (stack_a == NULL || *stack_a != NULL)
 		ft_lstclear(stack_a, NULL);
@@ -66,16 +26,13 @@ int	main(int argc, char **argv)
 {
 	t_stack	*stack_a;
 	t_stack	*stack_b;
-	int		size;
 
-	if (!stack_a || argc < 2)
-		return(0);
-	if (!is_correct_input(argv))
-		print_errorr(NULL, NULL);
+	stack_a = NULL;
 	stack_b = NULL;
-	stack_a = fill_stack(argc, argv);
-	if (!ft_checksort(a))
-		ft_sort(&a);
-	ft_free(&a);
+	if (argc == 1 || (argc == 2 && !argv[1][0]))
+		return (1);
+	else if (argc == 2)
+		argv = ft_split(argv[1], ' ');
+	
 	return (0);
 }
