@@ -14,10 +14,17 @@
 
 typedef struct s_stack
 {
-    int				nbr;
-    int				index;
-    struct s_stack	*next;
-    struct s_stack	*prev;
+	struct s_stack	*next;
+	struct s_stack	*prev;
+	int				next;
+	int				max;
+	int				min;
+	int				mid;
+	int				flag;
+	t_list			*stack_a;
+	t_list			*stack_b;
+	int				a_size
+	int				b_size;
 }					t_stack;
 
 #endif
