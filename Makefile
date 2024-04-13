@@ -1,18 +1,21 @@
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
-INCLUDE = -I push_swap.h
-LIBFT = ./
+CFLAGS = -Wall -Wextra -Werror -I/push_swap.h
+LIBFT = ./libft/libft.a
 RM = rm -rf
 NAME = push_swap
 
-SRC = push_swap.c 
+SRC = 	push_swap.c
 
-OBJS = $(SRC:%.c=.o)
+OBJS = $(SRC:%.c=%.o)
 
 all: $(NAME)
 
-$(all): $(OBJS)
-		$(MAKE) -C ./libft $(CC) $ (CFLAGS) $(OBJS) $(LIBFT) -o $(NAME)
+$(NAME): $(OBJS)
+		make -C ./libft
+		$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o push_swap
+
+$(OBJS): %.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean: 
 		$(MAKE) clean -C ./libft

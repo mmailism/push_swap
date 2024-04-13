@@ -9,21 +9,20 @@
 # include <string.h>
 # include <fcntl.h>
 # include <limits.h>
-# include "libft.h"
-# include "ft_printf.h"
+# include "./libft/libft.h"
+# include <stdio.h>
 
 typedef struct s_stack
 {
 	struct s_stack	*next;
 	struct s_stack	*prev;
-	int				next;
 	int				max;
 	int				min;
 	int				mid;
 	int				flag;
 	t_list			*stack_a;
 	t_list			*stack_b;
-	int				a_size
+	int				a_size;
 	int				b_size;
 }					t_stack;
 
