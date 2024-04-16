@@ -69,6 +69,8 @@ t_list	**get_num(char **argv, t_list **a)
 			if (n > INT_MAX || n < INT_MIN)
 				free_exit(a, 2);
 			stack_init(a, ft_lstnew(nbr));
+			// recieve returned adress
+			// a = stack_init(...); updated address
 		}
 		else
 			free_exit(a, 2);
@@ -91,6 +93,9 @@ t_list	**stack_init(t_list **a, t_list **new)
 	}
 	top = ft_lstadd_front(*a);
 	top->next = new;
+	// This 'top' variable has asign but doesn't use
+	// So we have to return adress top
+	// return (top)
 }
 
 t_stack	*get_bottom(t_stack *stack)
