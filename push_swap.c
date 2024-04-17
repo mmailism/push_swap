@@ -31,6 +31,15 @@
 // void	input_is_correct(char **param)
 // {
 // }
+t_stack	*lst_last(t_stack *lst)
+{
+	if (!lst)
+		return (lst);
+	while (lst->next != 0)
+		lst = lst->next;
+	return (lst);
+}
+
 t_stack	stack_add(t_stack **stack, t_stack *new)
 {
 	t_stack	*tmp;
@@ -39,18 +48,19 @@ t_stack	stack_add(t_stack **stack, t_stack *new)
 		*stack = new;
 	else
 	{
-		tmp = ft_lstlast(*(stack));
+		tmp = lst_last(*stack);
 		tmp->next = new;
 	}
+	return (*tmp);
 }
 
-t_stack *stack_new(t_stack **new)
+t_stack *stack_new(t_stack *new)
 {
 	t_stack	*list;
 
 	list = malloc(sizeof(t_stack));
 	if (!list)
-		return ;
+		return (NULL);
 	list->content = new;
 	list->next = '\0';
 	return (list);
