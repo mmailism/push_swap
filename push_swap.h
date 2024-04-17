@@ -16,6 +16,7 @@ typedef struct s_stack
 {
 	struct s_stack	*next;
 	struct s_stack	*prev;
+	long int		content;
 	int				max;
 	int				min;
 	int				mid;

@@ -12,20 +12,48 @@
 
 #include "push_swap.h"
 
-void	*free_exit(t_list **a, int mem)
+// void	*free_exit(t_list **a, int mem)
+// {
+// 	if (mem == 1)
+// 	{
+// 		free(a);
+// 		exit(0);
+// 	}
+// 	if (mem == 2)
+// 	{
+// 		if (a == NULL || a != NULL)
+// 			free(a);
+// 		write(2, "Error\n", 6);
+// 		exit (0);
+// 	}
+// }
+
+// void	input_is_correct(char **param)
+// {
+// }
+t_stack	stack_add(t_stack **stack, t_stack *new)
 {
-	if (mem == 1)
+	t_stack	*tmp;
+
+	if (*stack == NULL)
+		*stack = new;
+	else
 	{
-		free(a);
-		exit(0);
+		tmp = ft_lstlast(*(stack));
+		tmp->next = new;
 	}
-	if (mem == 2)
-	{
-		if (a == NULL || a != NULL)
-			free(a);
-		write(2, "Error\n", 6);
-		exit (0);
-	}
+}
+
+t_stack *stack_new(t_stack **new)
+{
+	t_stack	*list;
+
+	list = malloc(sizeof(t_stack));
+	if (!list)
+		return ;
+	list->content = new;
+	list->next = '\0';
+	return (list);
 }
 
 void	get_numbers(char *av, t_stack **stack_a)
@@ -36,17 +64,23 @@ void	get_numbers(char *av, t_stack **stack_a)
 
 	param = ft_split(av, ' ');
 	i = 0;
-	while (param[i] != '\0')
+	while (param[i] != NULL)
 	{
-		if (input_is_correct(param[i]))
+		if (param[i] != NULL/*input_is_correct(param[i])*/)
 		{
 			n = ft_atoi(param[i]);
 			if (n > INT_MAX || n < INT_MIN)
-				error_exit(stack_a, NULL);
+			{
+				return (free(stack_a), NULL);
+				// error_exit(stack_a, NULL);
+			}
 			stack_add(stack_a, stack_new(n));
 		}
 		else
-			error_exit(NULL, NULL);
+		{
+			return ;
+			// error_exit(NULL, NULL);
+		}
 		free(param[i]);
 		i++;
 	}
@@ -65,22 +99,20 @@ t_list	**get_num(char **argv, t_list **a)
 	{
 		if (input_correct(tmp[i]))
 		{
-			n = ft_atoi(tmp[i]);
+			nbr = ft_atoi(tmp[i]);
 			if (n > INT_MAX || n < INT_MIN)
-				free_exit(a, 2);
-			stack_init(a, ft_lstnew(nbr));
-			// recieve returned adress
-			// a = stack_init(...); updated address
+				return (free(tmp), NULL);
+			a = stack_init(a, ft_lstnew(nbr));
 		}
 		else
-			free_exit(a, 2);
+			return (free(tmp), NULL);
 		free(tmp[i]);
 		i++;
 	}
 	free(tmp);
 }
 
-t_list	**stack_init(t_list **a, t_list **new)
+t_stack	**stack_init(t_stack **a, t_stack **new)
 {
 	t_list	*top;
 
@@ -91,36 +123,29 @@ t_list	**stack_init(t_list **a, t_list **new)
 		*a = new;
 		return ;
 	}
-	top = ft_lstadd_front(*a);
+	top = get_bottom(*a);
 	top->next = new;
+	return (top);
 	// This 'top' variable has asign but doesn't use
 	// So we have to return adress top
 	// return (top)
 }
 
-t_stack	*get_bottom(t_stack *stack)
-{
-	while (stack && stack->next != NULL)
-		stack = stack->next;
-	return (stack);
-}
-
 int	main(int argc, char **argv)
 {
 	t_list	*a;
-	t_list	*b
+	t_list	*b;
 	int i;
 
 	a = NULL;
 	b = NULL;
-	i= 1;
+	i = 1;
 	while (i < argc)
 	{
 		get_numbers(argv[i], &a);
 		i++;
 	}
-	stack_init(&a, argv + 1, argc == 2);
-	printf("here %p", a);
+	printf("here %d", i);
 	// if (!stack_sort(a))
 	// {
 	// 	if (stack_sort(a) == 2)
