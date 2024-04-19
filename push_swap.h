@@ -16,15 +16,21 @@ typedef struct s_stack
 {
 	struct s_stack	*next;
 	struct s_stack	*prev;
-	long int		content;
+	int				content;
 	int				max;
 	int				min;
 	int				mid;
 	int				flag;
-	t_list			*stack_a;
-	t_list			*stack_b;
 	int				a_size;
 	int				b_size;
 }					t_stack;
+
+t_stack	*stack_add(t_stack *stack, t_stack *new);
+t_stack	*stack_init(t_stack *a, t_stack *new);
+t_stack	*stack_last(t_stack *lst);
+t_stack *stack_new(int *new);
+void	get_numbers(char *av, t_stack *stack_a);
+
+char	**ft_split(char const *s, char c);
 
 #endif

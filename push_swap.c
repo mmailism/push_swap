@@ -31,60 +31,56 @@
 // void	input_is_correct(char **param)
 // {
 // }
-t_stack	*lst_last(t_stack *lst)
-{
-	if (!lst)
-		return (lst);
-	while (lst->next != 0)
-		lst = lst->next;
-	return (lst);
-}
 
-t_stack	stack_add(t_stack **stack, t_stack *new)
+int	ft_atoi(const char *str)
 {
-	t_stack	*tmp;
+	unsigned int	num;
+	signed char		sign;
+	size_t			i;
 
-	if (*stack == NULL)
-		*stack = new;
-	else
+	sign = 1;
+	num = 0;
+	i = 0;
+	while ((str[i] == ' ' || str[i] == '\n'
+			|| str[i] == '\t' || str[i] == '\v'
+			|| str[i] == '\r' || str[i] == '\f') && str[i])
+		i++;
+	if (str[i] == '-' || str[i] == '+')
 	{
-		tmp = lst_last(*stack);
-		tmp->next = new;
+		if (str[i] == '-')
+			sign = -1;
+		i++;
 	}
-	return (*tmp);
+	while (str[i] != '\0')
+	{
+		if (! (48 <= str[i] && str[i] <= 57))
+			return (num * sign);
+		num = (num * 10) + str[i] - '0';
+		i++;
+	}
+	return (num * sign);
 }
 
-t_stack *stack_new(t_stack *new)
-{
-	t_stack	*list;
-
-	list = malloc(sizeof(t_stack));
-	if (!list)
-		return (NULL);
-	list->content = new;
-	list->next = '\0';
-	return (list);
-}
-
-void	get_numbers(char *av, t_stack **stack_a)
+void	get_numbers(char *av, t_stack *stack_a)
 {
 	char		**param;
-	long int	n;
+	int			n;
 	int			i;
 
 	param = ft_split(av, ' ');
 	i = 0;
 	while (param[i] != NULL)
 	{
-		if (param[i] != NULL/*input_is_correct(param[i])*/)
+		if (param[i] != NULL/* && input_is_correct(param[i])*/)
 		{
 			n = ft_atoi(param[i]);
 			if (n > INT_MAX || n < INT_MIN)
 			{
-				return (free(stack_a), NULL);
+				free(param);
+				exit(0);
 				// error_exit(stack_a, NULL);
 			}
-			stack_add(stack_a, stack_new(n));
+			stack_add(stack_a, stack_new(&n));
 		}
 		else
 		{
@@ -97,69 +93,45 @@ void	get_numbers(char *av, t_stack **stack_a)
 	free(param);
 }
 
-t_list	**get_num(char **argv, t_list **a)
-{
-	char	**tmp;
-	int		i;
-	long	nbr;
+// t_stack	*get_num(char **argv, t_stack *a)
+// {
+// 	char		**tmp;
+// 	int			i;
+// 	long		nbr;
 
-	tmp = ft_split(argv, ' ');
-	i = 0;
-	while (tmp[i] != '\0')
-	{
-		if (input_correct(tmp[i]))
-		{
-			nbr = ft_atoi(tmp[i]);
-			if (n > INT_MAX || n < INT_MIN)
-				return (free(tmp), NULL);
-			a = stack_init(a, ft_lstnew(nbr));
-		}
-		else
-			return (free(tmp), NULL);
-		free(tmp[i]);
-		i++;
-	}
-	free(tmp);
-}
-
-t_stack	**stack_init(t_stack **a, t_stack **new)
-{
-	t_list	*top;
-
-	if (!new)
-		return ;
-	if (!*a)
-	{
-		*a = new;
-		return ;
-	}
-	top = get_bottom(*a);
-	top->next = new;
-	return (top);
-	// This 'top' variable has asign but doesn't use
-	// So we have to return adress top
-	// return (top)
-}
+// 	tmp = ft_split(*argv, ' ');
+// 	i = 0;
+// 	while (tmp[i] != NULL)
+// 	{
+// 		if (tmp[i]/*input_correct(tmp[i])*/)
+// 		{
+// 			nbr = ft_atoi(tmp[i]);
+// 			if (nbr > INT_MAX || nbr < INT_MIN)
+// 				return (free(tmp), NULL);
+// 			a = stack_init(&a, stack_new(&nbr));
+// 		}
+// 		else
+// 			return (free(tmp), NULL);
+// 		free(tmp[i]);
+// 		i++;
+// 	}
+// 	free(tmp);
+// }
 
 int	main(int argc, char **argv)
 {
-	t_list	*a;
-	t_list	*b;
+	t_stack	*a;
+	// t_stack	*b;
 	int i;
 
 	a = NULL;
-	b = NULL;
+	// b = NULL;
 	i = 1;
 	while (i < argc)
 	{
-		get_numbers(argv[i], &a);
+		get_numbers(argv[i], a);
 		i++;
 	}
 	printf("here %d", i);
-	// if (!stack_sort(a))
-	// {
-	// 	if (stack_sort(a) == 2)
-	// 		sa(&a, false)
-	// }
 	return (0);
 }
