@@ -12,6 +12,11 @@
 
 #include "push_swap.h"
 
+t_stack	*stack_add(t_stack *stack, t_stack *new);
+t_stack	*stack_init(t_stack *a, t_stack *new);
+t_stack	*stack_last(t_stack *lst);
+t_stack *stack_new(int *new);
+
 // void	*free_exit(t_list **a, int mem)
 // {
 // 	if (mem == 1)
@@ -61,7 +66,7 @@ int	ft_atoi(const char *str)
 	return (num * sign);
 }
 
-void	get_numbers(char *av, t_stack *stack_a)
+t_stack	get_numbers(char *av, t_stack *stack_a)
 {
 	char		**param;
 	int			n;
@@ -80,17 +85,18 @@ void	get_numbers(char *av, t_stack *stack_a)
 				exit(0);
 				// error_exit(stack_a, NULL);
 			}
-			stack_add(stack_a, stack_new(&n));
+			stack_a = stack_init(stack_a, stack_new(&n));
 		}
 		else
 		{
-			return ;
+			exit (0);
 			// error_exit(NULL, NULL);
 		}
 		free(param[i]);
 		i++;
 	}
 	free(param);
+	return (*stack_a);
 }
 
 // t_stack	*get_num(char **argv, t_stack *a)

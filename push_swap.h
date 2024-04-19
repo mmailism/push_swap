@@ -29,7 +29,7 @@ t_stack	*stack_add(t_stack *stack, t_stack *new);
 t_stack	*stack_init(t_stack *a, t_stack *new);
 t_stack	*stack_last(t_stack *lst);
 t_stack *stack_new(int *new);
-void	get_numbers(char *av, t_stack *stack_a);
+t_stack	get_numbers(char *av, t_stack *stack_a);
 
 char	**ft_split(char const *s, char c);
 

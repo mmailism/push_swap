@@ -41,7 +41,7 @@ t_stack	*stack_init(t_stack *a, t_stack *new)
 	// return (top)
 }
 
-t_stack	*stack_add(t_stack *stack, t_stack *new)
+void	*stack_add(t_stack *stack, t_stack *new)
 {
 	t_stack	*tmp;
 
@@ -50,7 +50,6 @@ t_stack	*stack_add(t_stack *stack, t_stack *new)
 		tmp = new;
 	else
 		tmp->next = new;
-	return (tmp);
 }
 
 t_stack	*stack_last(t_stack *lst)
