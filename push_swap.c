@@ -12,7 +12,6 @@
 
 #include "push_swap.h"
 
-
 static void	free_stack(t_stack *stack)
 {
 	t_stack	*tmp;
@@ -257,29 +256,93 @@ static void	pos_init(t_list *stack)
 	stack->size_b = 0;
 }
 
+static bool	is_sort(t_list *ref)
+{
+	t_stack	*current;
+
+	current = ref->a;
+	while (current->next != NULL)
+	{
+		if ((current->nb > current->next->nb))
+			return (false);
+		current = current->next;
+	}
+	return (true);
+}
+
+int	stack_len(t_list *stack)
+{
+	int	count;
+	t_stack	*current;
+
+	count = 0;
+	current = stack->a;
+	while (current->next != NULL)
+	{
+		current = current->next;
+		count++;
+	}
+	return (count);
+}
+
+int	show_output(char *str, int show)
+{
+	if (show == 0)
+		return (1);
+	if (printf("%s", str) == -1)
+		return (-1);
+	return (1);
+}
+
+void	do_sa(t_list *stack)
+{
+	int	tmp;
+
+	if (stack->a && stack->a->next)
+	{
+		tmp = stack->a->next->nb;
+		stack->a->next->nb = stack->a->nb;
+		stack->a->nb = tmp;
+		if (show_output("sa\n", stack->show_output) == -1)
+			error_free(stack);
+		stack->top_a = stack->a;
+		if (stack->size_a == 2)
+			stack->bottom_a = stack->a->next;
+	}
+	else
+		return ;
+}
+
 int	main(int argc, char **argv)
 {
 	t_list	*stack;
 
 	stack = NULL;
-	if (argc == 1 || (argc == 2 && !argv[1][0]))
-		error_free (stack);
 	if (argc > 1)
 	{
 		stack = stack_init(argc, argv);
-		printf("HERE");
 		pos_init(stack);
 		stack->show_output = 1;
-		if (stack)
+		if (!is_sort(stack))
 		{
-			if (!is_sort(stack))
-			{
-				if (stack->size_a <= 5)
-					small_sort(stack);
-				else
-					big_sort(stack);
-			}
-			free_data(stack);
+			if (stack_len(stack) == 2)
+				do_sa(stack);
+			// else if (stack_len(stack) == 3)
+			// 	tiny_sort(stack);
+			// else
+			// 	push_swap(stack);
 		}
+		free_data(stack);
+		// if (stack)
+		// {
+		// 	if (!is_sort(stack))
+		// 	{
+		// 		if (stack->size_a <= 5)
+		// 			small_sort(stack);
+		// 		else
+		// 			big_sort(stack);
+		// 	}
+		// 	free_data(stack);
+		// }
 	}
 }
