@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "./include/push_swap.h"
 
 static void	free_stack(t_stack *stack)
 {

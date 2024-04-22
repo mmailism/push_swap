@@ -1,31 +1,37 @@
-CC = cc
-CFLAGS = -Wall -Wextra -Werror -I/push_swap.h
-# LIBFT = ./libft/libft.a
+CC = gcc
+CFLAGS = -Wall -Wextra -Werror -Iincludes
 RM = rm -rf
 NAME = push_swap
+OBJ_DIR			= obj
 
-SRC = 	push_swap.c / utils.c / stack.c
+SRC = 	main.c \
+		utils.c
 
-OBJS = $(SRC:%.c=%.o)
+$(NAME): $(OBJS)
+	$(CC) $(CFLAGS) -c -o $@
+
+$(NAME): $(OBJ_DIR)  $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
+
+OBJS = $(SRCS:%.c=$(OBJ_DIR)/%.o)
+
+$(OBJS): $(OBJ_DIR)%.o: %.c | obj
+	$(CC) $(CFLAGS) -c $< -o $@
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
-		$(MAKE) $(CC) $(CFLAGS) $(OBJS) -o push_swap
+obj:
+	mkdir -p $(OBJ_DIR)
 
-$(OBJS): %.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+$(OBJ_DIR)/%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDE)
 
-clean: 
-		$(MAKE) clean
-		$(RM) $(OBJS)
+clean:
+	@rm -rf $(OBJ_DIR)
 
 fclean: clean
-		$(MAKE) fclean
-		$(RM) $(NAME)
+	@rm -rf $(NAME)
 
 re: fclean all
-
-run: all clean
 
 .PHONY: all clean

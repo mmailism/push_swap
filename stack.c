@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "./include/push_swap.h"
 
 // t_stack	*get_bottom(t_stack *a, t_stack *new)
 // {
@@ -73,16 +73,16 @@
 // 	return (list);
 // }
 
-bool	is_sort(t_list *ref)
-{
-	t_stack	*current;
+// bool	is_sort(t_list *ref)
+// {
+// 	t_stack	*current;
 
-	current = ref->a;
-	while (current->next != NULL)
-	{
-		if ((current->nb > current->next->nb))
-			return (false);
-		current = current->next;
-	}
-	return (true);
-}
+// 	current = ref->a;
+// 	while (current->next != NULL)
+// 	{
+// 		if ((current->nb > current->next->nb))
+// 			return (false);
+// 		current = current->next;
+// 	}
+// 	return (true);
+// }
