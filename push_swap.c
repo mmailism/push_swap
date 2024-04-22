@@ -12,21 +12,6 @@
 
 #include "push_swap.h"
 
-// void	*free_exit(t_list **a, int mem)
-// {
-// 	if (mem == 1)
-// 	{
-// 		free(a);
-// 		exit(0);
-// 	}
-// 	if (mem == 2)
-// 	{
-// 		if (a == NULL || a != NULL)
-// 			free(a);
-// 		write(2, "Error\n", 6);
-// 		exit (0);
-// 	}
-// }
 
 static void	free_stack(t_stack *stack)
 {
@@ -40,7 +25,7 @@ static void	free_stack(t_stack *stack)
 	}
 }
 
-void	free_data(t_stack *stack)
+void	free_data(t_list *stack)
 {
 	if(stack)
 	{
@@ -54,38 +39,11 @@ void	free_data(t_stack *stack)
 	}
 }
 
-void	error_free(t_stack *stack)
+void	error_free(t_list *stack)
 {
 	free_data(stack);
 	write(2, "Error\n", 6);
 	exit(1);
-}
-
-int	error_repetition(t_stack *a, int nbr)
-{
-	if (a == NULL)
-		return (0);
-	while (a)
-	{
-		if (a->content == nbr)
-			return (1);
-		a = a->next;
-	}
-	return (0);
-}
-
-int	error_syntax(char *str_nbr)
-{
-	if (!(*str_nbr == '+' || *str_nbr == '-' || (*str_nbr >= '0' && *str_nbr <= '9')))
-		return (1);
-	if ((*str_nbr == '+' || *str_nbr == '-') && !(str_nbr >= '0' && str_nbr <= '9'))
-		return (1);
-	while (*++str_nbr)
-	{
-		if (!(*str_nbr >= '0' && *str_nbr <= '9'))
-			return (1);
-	}
-	return (0);
 }
 
 t_stack	*find_last_node(t_stack *head)
@@ -97,43 +55,48 @@ t_stack	*find_last_node(t_stack *head)
 	return (head);
 }
 
-void	append_node(t_stack **stack, int nbr)
+t_list	*alloc_list(void)
 {
-	t_stack	*node;
-	t_stack	*last_node;
-
-	if (stack == NULL)
-		return ;
-	node = malloc(sizeof(t_stack));
-	if (node == NULL)
-		return ;
-	node->next = NULL;
-	node->content = nbr;
-	if (*stack == NULL)
-	{
-		*stack = node;
-		node->prev = NULL;
-	}
-	else
-	{
-		last_node = find_last_node(*stack);
-		last_node->next = node;
-		node->prev = last_node;
-	}
-}
-
-t_stack	*alloc_list(void)
-{
-	t_stack *stack;
+	t_list *stack;
 
 	stack = NULL;
-	stack = (t_stack *)malloc(sizeof(t_stack));
+	stack = (t_list *)malloc(sizeof(t_list));
 	if (!stack)
 		error_free(NULL);
 	stack->a = NULL;
 	stack->b = NULL;
 	stack->tmp = NULL;
 	return (stack);
+}
+
+
+int	convert_nb(char *str_nbr, t_list *stack)
+{
+	int			neg;
+	long long	res;
+	
+	neg = 1;
+	res = 0;
+	if (*str_nbr == '\0')
+		error_free(stack);
+	if (*str_nbr == '+' || *str_nbr == '-')
+	{
+		if (*(str_nbr + 1) < '0' || *(str_nbr + 1) > '9')
+			error_free(stack);
+		if (*str_nbr == '-')
+			neg = -1;
+		str_nbr++;
+	}
+	while (*str_nbr)
+	{
+		if ((*str_nbr < '0' || *str_nbr > '9'))
+			error_free(stack);
+		res = (*str_nbr - '0') + (res * 10);
+		if ((res * neg) < INT_MIN || (res * neg) > INT_MAX)
+			error_free(stack);
+		str_nbr++;
+	}
+	return ((int)(res * neg));
 }
 
 static int	count_elements(char **data)
@@ -146,7 +109,7 @@ static int	count_elements(char **data)
 	return (i);
 }
 
-static char	**split_to_stack(t_stack *stack, char *str)
+static char	**split_to_stack(t_list *stack, char *str)
 {
 	char	**data;
 	char	*temp;
@@ -171,7 +134,74 @@ static char	**split_to_stack(t_stack *stack, char *str)
 	return (data);
 }
 
-void	add_data(t_stack *stack, int argc, char **argv)
+void	check_dup(int nb, t_list *stack)
+{
+	t_stack	*head_stack;
+
+	if (!stack->a)
+		return ;
+	head_stack = stack->a;
+	while (head_stack)
+	{
+		if (nb == head_stack->nb)
+			error_free(stack);
+		head_stack = head_stack->next;
+	}
+}
+
+t_stack	*alloc_stack(t_list *lst, t_stack *stack, int nb)
+{
+	t_stack	*new;
+
+	new = (t_stack *)malloc(sizeof(t_stack));
+	if (!new)
+		error_free(lst);
+	new->nb = nb;
+	new->sort = 0;
+	new->position = 1;
+	new->range = 1;
+	new->next = stack;
+	stack = new;
+	return (new);
+}
+
+char	**free_split(char **data)
+{
+	int	i;
+
+	i = 0;
+	while (data[i])
+	{
+		free(data[i]);
+		data[i] = NULL;
+		i++;
+	}
+	free(data);
+	return (NULL);
+}
+
+int	stack_size(t_list *stack, char name)
+{
+	int		size;
+	t_stack	*current;
+
+	size = 0;
+	if (name == 'a')
+		current = stack->a;
+	else
+		current = stack->b;
+	while (current->next)
+	{
+		size++;
+		current = current->next;
+		if (!current->next)
+			size++;
+	}
+	return (size);
+}
+
+//!now//
+void	add_data(t_list *stack, int argc, char **argv)
 {
 	int		nb;
 	char	**data;
@@ -184,6 +214,7 @@ void	add_data(t_stack *stack, int argc, char **argv)
 		head = data;
 		while (*head)
 		{
+			//!
 			nb = convert_nb(*head, stack);
 			check_dup(nb, stack);
 			stack->a = alloc_stack(stack, stack->a, nb);
@@ -195,26 +226,60 @@ void	add_data(t_stack *stack, int argc, char **argv)
 	stack->t_size = stack_size(stack, 'a');
 }
 
-t_stack	*stack_init(int argc, char **argv)
+t_list	*stack_init(int argc, char **argv)
 {
-	t_stack	*new;
+	t_list	*new;
 
 	new = alloc_list();
 	add_data(new, argc, argv);
 	return (new);
 }
 
+t_stack	*bottom_stack(t_stack *stack)
+{
+	t_stack	*current;
+
+	current = stack;
+	while (current->next)
+	{
+		current = current->next;
+	}
+	return (current);
+}
+
+static void	pos_init(t_list *stack)
+{
+	stack->top_a = stack->a;
+	stack->bottom_a = bottom_stack(stack->a);
+	stack->top_b = NULL;
+	stack->bottom_b = NULL;
+	stack->size_a = stack->t_size;
+	stack->size_b = 0;
+}
+
 int	main(int argc, char **argv)
 {
-	t_stack	*stack;
+	t_list	*stack;
 
 	stack = NULL;
 	if (argc == 1 || (argc == 2 && !argv[1][0]))
-		return (1);
-	else if (argc > 1)
+		error_free (stack);
+	if (argc > 1)
 	{
 		stack = stack_init(argc, argv);
-		position_init(stack);
-		stack->output
+		printf("HERE");
+		pos_init(stack);
+		stack->show_output = 1;
+		if (stack)
+		{
+			if (!is_sort(stack))
+			{
+				if (stack->size_a <= 5)
+					small_sort(stack);
+				else
+					big_sort(stack);
+			}
+			free_data(stack);
+		}
 	}
 }
