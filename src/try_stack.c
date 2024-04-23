@@ -48,25 +48,49 @@ void sortStack(l_node **top) {
         return;
     }
 
-    l_node *current, *next;
+    l_node *current = *top;
+    l_node *prev = NULL;
+    l_node *next = NULL;
+    l_node *last = NULL;
     int temp;
     int swapped;
 
-    do {
-        swapped = 0;
-        current = *top;
-        while (current->next != NULL) {
-            next = current->next;
-            if (current->data > next->data) {
-                // Swap data of current and next nodes
-                temp = current->data;
-                current->data = next->data;
-                next->data = temp;
-                swapped = 1;
-            }
-            current = current->next;
-        }
-    } while (swapped);
+    // Swap first and second elements if necessary
+    if (current->data > current->next->data) {
+        temp = current->data;
+        current->data = current->next->data;
+        current->next->data = temp;
+        printStack(*top);
+    }
+
+    // Find the last element and its previous
+    while (current->next != NULL) {
+        prev = current;
+        current = current->next;
+    }
+    last = current;
+
+    // Swap first and last elements if necessary
+    if ((*top)->data > last->data) {
+        temp = (*top)->data;
+        (*top)->data = last->data;
+        last->data = temp;
+        printStack(*top);
+    }
+
+    // Move the pointer back to the beginning
+    current = *top;
+
+    // Swap last element with its previous
+    while (current->next != last) {
+        current = current->next;
+    }
+    if (current->data > last->data) {
+        temp = current->data;
+        current->data = last->data;
+        last->data = temp;
+        printStack(*top);
+    }
 }
 
 l_node *push(l_node *top, int data) {
@@ -89,8 +113,8 @@ l_node *pop(l_node *top) {
 
 int main() {
     l_node *top = createNode(3);
-    top->next = createNode(4);
-    top->next->next = createNode(1);
+    top->next = createNode(1);
+    top->next->next = createNode(4);
     top->next->next->next = createNode(2);
 
     // พิมพ์สแต็กเริ่มต้น
