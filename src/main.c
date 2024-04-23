@@ -318,16 +318,16 @@ void	sa_sb(t_list *stack)
 	if (stack->a && stack->a->next)
 	{
 		tmp = stack->a->next->nb;
+			print_stack(stack->a, 1);
 		stack->a->next->nb = stack->a->nb;
+			print_stack(stack->a, 1);
 		stack->a->nb = tmp;
+			print_stack(stack->a, 1);
 		if (show_output("sa\n", stack->show_output) == -1)
 			error_free(stack);
-		stack->top_a = stack->a;
+		// stack->top_a = stack->a;
 		// if (stack->size_a == 2)
 		// 	stack->bottom_a = stack->a->next;
-		print_stack(stack->a, 1);
-		print_stack(stack->b, 2);
-		// printf("%d, %d, %d\n", stack->a->nb, stack->a->next->nb, stack->a->next->next->nb);
 	}
 	else if (stack->b && stack->b->next)
 	{
@@ -344,23 +344,22 @@ void	sa_sb(t_list *stack)
 
 void	pa(t_list *stack)
 {
-	int	tmp;
+	t_stack *tmp;
 
-	if (stack->a && stack->a->next)
+	if (stack->a)
 	{
-		tmp = stack->a->next->nb;
-		stack->b->next->nb = stack->a->nb;
-		stack->b->nb = tmp;
+		tmp = stack->a;
+		stack->a = stack->a->next;
+			print_stack(stack->a, 1);
+			print_stack(stack->b, 2);
+		tmp->next = stack->b;
+        stack->b = tmp;
+			print_stack(stack->a, 1);
+			print_stack(stack->b, 2);
 		if (show_output("pa\n", stack->show_output) == -1)
-			error_free(stack);
-		stack->top_b = stack->b;
+            error_free(stack);
 	}
 }
-
-// void	tiny_sort(t_list *stack)
-// {
-
-// }
 
 int	main(int argc, char **argv)
 {
@@ -378,12 +377,13 @@ int	main(int argc, char **argv)
 			{
 				sa_sb(stack);
 			}
-			// else if (stack_len(stack) == 3)
-			// {
-			// // 	tiny_sort(stack);
-			// // else
-			// // 	push_swap(stack);
-			// }
+			else if (stack_len(stack) == 3)
+			{
+				pa(stack);
+			// 	tiny_sort(stack);
+			// else
+			// 	push_swap(stack);
+			}
 		}
 		free_data(stack);
 	}
