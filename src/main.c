@@ -213,7 +213,6 @@ void	add_data(t_list *stack, int argc, char **argv)
 		head = data;
 		while (*head)
 		{
-			//!
 			nb = convert_nb(*head, stack);
 			check_dup(nb, stack);
 			stack->a = alloc_stack(stack, stack->a, nb);
@@ -325,24 +324,14 @@ int	main(int argc, char **argv)
 		stack->show_output = 1;
 		if (!is_sort(stack))
 		{
-			if (stack_len(stack) == 2)
+			if (stack_len(stack) == 1)
 				do_sa(stack);
 			// else if (stack_len(stack) == 3)
 			// 	tiny_sort(stack);
 			// else
 			// 	push_swap(stack);
 		}
+		printf("%p\n", stack);
 		free_data(stack);
-		// if (stack)
-		// {
-		// 	if (!is_sort(stack))
-		// 	{
-		// 		if (stack->size_a <= 5)
-		// 			small_sort(stack);
-		// 		else
-		// 			big_sort(stack);
-		// 	}
-		// 	free_data(stack);
-		// }
 	}
 }
