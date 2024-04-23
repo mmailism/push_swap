@@ -51,7 +51,7 @@ void sortStack(l_node **top) {
     l_node *current = *top;
     l_node *prev = NULL;
     l_node *next = NULL;
-    l_node *last = NULL;
+    l_node* last = NULL;
     int temp;
     int swapped;
 
@@ -61,36 +61,23 @@ void sortStack(l_node **top) {
         current->data = current->next->data;
         current->next->data = temp;
         printStack(*top);
+        printf("sa\n");
     }
 
-    // Find the last element and its previous
-    while (current->next != NULL) {
-        prev = current;
-        current = current->next;
-    }
-    last = current;
-
-    // Swap first and last elements if necessary
-    if ((*top)->data > last->data) {
-        temp = (*top)->data;
-        (*top)->data = last->data;
-        last->data = temp;
+    // Move first node to last position
+    if (current->data > current->next->data)
+    {
+        last = *top;
+        while (last->next != NULL) {
+            last = last->next;
+        }
+        last->next = *top;
+        *top = (*top)->next;
+        last->next->next = NULL;
         printStack(*top);
+        printf("ra\n");
     }
-
-    // Move the pointer back to the beginning
-    current = *top;
-
-    // Swap last element with its previous
-    while (current->next != last) {
-        current = current->next;
-    }
-    if (current->data > last->data) {
-        temp = current->data;
-        current->data = last->data;
-        last->data = temp;
-        printStack(*top);
-    }
+    
 }
 
 l_node *push(l_node *top, int data) {
@@ -113,9 +100,10 @@ l_node *pop(l_node *top) {
 
 int main() {
     l_node *top = createNode(3);
-    top->next = createNode(1);
+    top->next = createNode(2);
     top->next->next = createNode(4);
-    top->next->next->next = createNode(2);
+    top->next->next->next = createNode(1);
+    top->next->next->next->next = createNode(5);
 
     // พิมพ์สแต็กเริ่มต้น
     printf("สแต็กเริ่มต้น ");
