@@ -7,6 +7,10 @@ typedef struct node {
     struct node*    next;
 } l_node;
 
+typedef struct l_list {
+    
+}
+
 // ฟังก์ชันสร้างโหนดใหม่
 l_node* createNode(int data) {
     l_node* newNode = (l_node*)malloc(sizeof(l_node));
@@ -77,7 +81,6 @@ void sortStack(l_node **top) {
         printStack(*top);
         printf("ra\n");
     }
-    
 }
 
 l_node *push(l_node *top, int data) {

@@ -12,46 +12,20 @@
 // # include "./libft/libft.h"
 # include <stdio.h>
 
-// typedef struct s_stack
-// {
-// 	struct s_stack	*next;
-// 	struct s_stack	*prev;
-// 	struct s_stack	*target_node;
-// 	int				content;
-// 	int				max;
-// 	int				min;
-// 	int				mid;
-// 	int				flag;
-// }					t_stack;
-
-// typedef struct l_list
-// {
-// 	int		t_size;
-// 	t_stack	*a;
-// 	t_stack	*b;
-// 	t_stack *tmp;
-// }	t_list;
-
-typedef struct a_list
+typedef struct l_stack
 {
 	int				nb;
-	int				position;
-	int				range;
 	int				sort;
-	struct a_list	*next;
-	struct a_list	*prev;
+	struct l_stack	*next;
+	struct l_stack	*prev;
 }	t_stack;
 
 typedef struct l_list
 {
-	int		pivot;
 	int		max_range;
 	int		t_size;
 	int		size_a;
 	int		size_b;
-	int		n_1;
-	int		n_2;
-	int		n_3;
 	int		show_output;
 	t_stack	*a;
 	t_stack	*b;

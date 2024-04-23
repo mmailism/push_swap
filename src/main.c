@@ -12,6 +12,28 @@
 
 #include "./../include/push_swap.h"
 
+void print_stack(t_stack *stack, int mode) 
+{
+	if (mode == 1)
+	{
+    	printf("stack A: ");
+    	while (stack != NULL) {
+    	    printf("%d ", stack->nb);
+    	    stack = stack->next;
+    	}
+    	printf("\n");
+	}
+	if (mode == 2)
+	{
+    	printf("stack B: ");
+    	while (stack != NULL) {
+    	    printf("%d ", stack->nb);
+    	    stack = stack->next;
+    	}
+    	printf("\n");
+	}
+}
+
 static void	free_stack(t_stack *stack)
 {
 	t_stack	*tmp;
@@ -64,10 +86,8 @@ t_list	*alloc_list(void)
 		error_free(NULL);
 	stack->a = NULL;
 	stack->b = NULL;
-	stack->tmp = NULL;
 	return (stack);
 }
-
 
 int	convert_nb(char *str_nbr, t_list *stack)
 {
@@ -157,8 +177,6 @@ t_stack	*alloc_stack(t_list *lst, t_stack *stack, int nb)
 		error_free(lst);
 	new->nb = nb;
 	new->sort = 0;
-	new->position = 1;
-	new->range = 1;
 	new->next = stack;
 	stack = new;
 	return (new);
@@ -293,7 +311,7 @@ int	show_output(char *str, int show)
 	return (1);
 }
 
-void	do_sa(t_list *stack)
+void	sa_sb(t_list *stack)
 {
 	int	tmp;
 
@@ -305,12 +323,44 @@ void	do_sa(t_list *stack)
 		if (show_output("sa\n", stack->show_output) == -1)
 			error_free(stack);
 		stack->top_a = stack->a;
-		if (stack->size_a == 2)
-			stack->bottom_a = stack->a->next;
+		// if (stack->size_a == 2)
+		// 	stack->bottom_a = stack->a->next;
+		print_stack(stack->a, 1);
+		print_stack(stack->b, 2);
+		// printf("%d, %d, %d\n", stack->a->nb, stack->a->next->nb, stack->a->next->next->nb);
+	}
+	else if (stack->b && stack->b->next)
+	{
+		tmp = stack->b->next->nb;
+		stack->b->next->nb = stack->b->nb;
+		stack->b->nb = tmp;
+		if (show_output("sb\n", stack->show_output) == -1)
+			error_free(stack);
+		stack->top_b = stack->b;
 	}
 	else
 		return ;
 }
+
+void	pa(t_list *stack)
+{
+	int	tmp;
+
+	if (stack->a && stack->a->next)
+	{
+		tmp = stack->a->next->nb;
+		stack->b->next->nb = stack->a->nb;
+		stack->b->nb = tmp;
+		if (show_output("pa\n", stack->show_output) == -1)
+			error_free(stack);
+		stack->top_b = stack->b;
+	}
+}
+
+// void	tiny_sort(t_list *stack)
+// {
+
+// }
 
 int	main(int argc, char **argv)
 {
@@ -324,14 +374,17 @@ int	main(int argc, char **argv)
 		stack->show_output = 1;
 		if (!is_sort(stack))
 		{
-			if (stack_len(stack) == 1)
-				do_sa(stack);
+			if (stack_len(stack) == 2)
+			{
+				sa_sb(stack);
+			}
 			// else if (stack_len(stack) == 3)
-			// 	tiny_sort(stack);
-			// else
-			// 	push_swap(stack);
+			// {
+			// // 	tiny_sort(stack);
+			// // else
+			// // 	push_swap(stack);
+			// }
 		}
-		printf("%p\n", stack);
 		free_data(stack);
 	}
 }
