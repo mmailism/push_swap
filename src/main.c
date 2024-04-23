@@ -376,10 +376,12 @@ int	main(int argc, char **argv)
 			if (stack_len(stack) == 2)
 			{
 				sa_sb(stack);
+				pa(stack);
 			}
 			else if (stack_len(stack) == 3)
 			{
-				pa(stack);
+				// pa(stack);
+				printf("HERE");
 			// 	tiny_sort(stack);
 			// else
 			// 	push_swap(stack);
