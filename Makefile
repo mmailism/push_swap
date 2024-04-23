@@ -1,21 +1,25 @@
-CC = gcc
-CFLAGS = -Wall -Wextra -Werror -Iincludes
-RM = rm -rf
-NAME = push_swap
+NAME 			= push_swap
+CC 				= gcc
+CFLAGS			= -Wall -Werror -Wextra -Iinclude -Ilibft
+LIBFT_DIR		= libft
+LIBFT_FILE		= $(LIBFT_DIR)/libft.a
+SRC_DIR			= src
 OBJ_DIR			= obj
 
-SRC = 	main.c \
-		utils.c
+VPATH = $(SRC_DIR)
 
-$(NAME): $(OBJS)
-	$(CC) $(CFLAGS) -c -o $@
+PUSH_SWAP_SRC	=	main.c \
+					utils.c
 
-$(NAME): $(OBJ_DIR)  $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
+PUSH_SWAP_OBJ	=	$(PUSH_SWAP_SRC:%.c=obj/%.o)
 
-OBJS = $(SRCS:%.c=$(OBJ_DIR)/%.o)
+$(NAME): $(LIBFT_FILE) $(PUSH_SWAP_OBJ)
+	$(CC) $(CFLAGS) $(PUSH_SWAP_OBJ) $(LIBFT_FILE) -o $@
 
-$(OBJS): $(OBJ_DIR)%.o: %.c | obj
+$(LIBFT_FILE):
+	$(MAKE) -C $(LIBFT_DIR)
+
+$(PUSH_SWAP_OBJ): $(OBJ_DIR)/%.o: %.c | obj
 	$(CC) $(CFLAGS) -c $< -o $@
 
 all: $(NAME)
@@ -23,15 +27,13 @@ all: $(NAME)
 obj:
 	mkdir -p $(OBJ_DIR)
 
-$(OBJ_DIR)/%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDE)
-
 clean:
-	@rm -rf $(OBJ_DIR)
+	rm -rf $(OBJ_DIR)
 
 fclean: clean
-	@rm -rf $(NAME)
+	rm -f $(NAME)
+	$(MAKE) fclean -C $(LIBFT_DIR)
 
 re: fclean all
 
-.PHONY: all clean
+.PHONY: all clean fclean re
