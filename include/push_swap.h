@@ -16,14 +16,13 @@ typedef struct l_stack
 {
 	int				nb;
 	int				sort;
+	struct l_stack	*last;
 	struct l_stack	*next;
 	struct l_stack	*prev;
 }	t_stack;
 
 typedef struct l_list
 {
-	int		max_range;
-	int		t_size;
 	int		size_a;
 	int		size_b;
 	int		show_output;
@@ -34,7 +33,6 @@ typedef struct l_list
 	t_stack	*top_b;
 	t_stack	*bottom_b;
 	t_stack	*tmp;
-	t_stack	*range_stack;
 }	t_list;
 
 // t_stack	*stack_add(t_stack *stack, t_stack *new);
@@ -44,5 +42,13 @@ typedef struct l_list
 // t_stack	get_numbers(char *av, t_stack *stack_a);
 
 char	**ft_split(char const *s, char c);
+
+void	sa(t_list *stack);
+void	sb(t_list *stack);
+void	ss(t_list *stack);
+
+void	pa(t_list *stack);
+
+void print_stack(t_stack *stack, int mode);
 
 #endif

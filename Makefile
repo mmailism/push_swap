@@ -9,7 +9,9 @@ OBJ_DIR			= obj
 VPATH = $(SRC_DIR)
 
 PUSH_SWAP_SRC	=	main.c \
-					utils.c
+					utils.c \
+					swap.c \
+					push.c
 
 PUSH_SWAP_OBJ	=	$(PUSH_SWAP_SRC:%.c=obj/%.o)
 

@@ -12,7 +12,7 @@
 
 #include "./../include/push_swap.h"
 
-void print_stack(t_stack *stack, int mode) 
+void print_stack(t_stack *stack, int mode)
 {
 	if (mode == 1)
 	{
@@ -67,12 +67,12 @@ void	error_free(t_list *stack)
 	exit(1);
 }
 
-t_stack	*find_last_node(t_stack *head)
+t_list	*find_last_node_a(t_list *head)
 {
 	if (head == NULL)
 		return (NULL);
-	while (head->next)
-		head = head->next;
+	while (head->a->next)
+		head->a->last = head->a->next;
 	return (head);
 }
 
@@ -217,7 +217,6 @@ int	stack_size(t_list *stack, char name)
 	return (size);
 }
 
-//!now//
 void	add_data(t_list *stack, int argc, char **argv)
 {
 	int		nb;
@@ -239,7 +238,7 @@ void	add_data(t_list *stack, int argc, char **argv)
 		data = free_split(data);
 		argc--;
 	}
-	stack->t_size = stack_size(stack, 'a');
+	// stack->t_size = stack_size(stack, 'a');
 }
 
 t_list	*stack_init(int argc, char **argv)
@@ -269,8 +268,6 @@ static void	pos_init(t_list *stack)
 	stack->bottom_a = bottom_stack(stack->a);
 	stack->top_b = NULL;
 	stack->bottom_b = NULL;
-	stack->size_a = stack->t_size;
-	stack->size_b = 0;
 }
 
 static bool	is_sort(t_list *ref)
@@ -311,54 +308,90 @@ int	show_output(char *str, int show)
 	return (1);
 }
 
-void	sa_sb(t_list *stack)
+void	ra(t_list *stack)
 {
-	int	tmp;
+	t_stack	*head;
+	t_stack	*curr;
 
-	if (stack->a && stack->a->next)
-	{
-		tmp = stack->a->next->nb;
-			print_stack(stack->a, 1);
-		stack->a->next->nb = stack->a->nb;
-			print_stack(stack->a, 1);
-		stack->a->nb = tmp;
-			print_stack(stack->a, 1);
-		if (show_output("sa\n", stack->show_output) == -1)
-			error_free(stack);
-		// stack->top_a = stack->a;
-		// if (stack->size_a == 2)
-		// 	stack->bottom_a = stack->a->next;
-	}
-	else if (stack->b && stack->b->next)
-	{
-		tmp = stack->b->next->nb;
-		stack->b->next->nb = stack->b->nb;
-		stack->b->nb = tmp;
-		if (show_output("sb\n", stack->show_output) == -1)
-			error_free(stack);
-		stack->top_b = stack->b;
-	}
-	else
+		print_stack(stack->a, 1);
+		print_stack(stack->b, 2);
+	if (stack->a == NULL || stack->a->next == NULL)
 		return ;
+	head = stack->a->next;
+	curr = stack->a;
+	while (curr->next != NULL)
+	{
+		curr = curr->next;
+	}
+	curr->next = stack->a;
+	stack->a->next = NULL;
+	stack->a = head;
+		print_stack(stack->a, 1);
+		print_stack(stack->b, 2);
+	printf("ra\n");
+
+	// if (show_output("ra\n", stack->show_output) == -1)
+	// 		return ;
+		// error_free(stack);
 }
 
-void	pa(t_list *stack)
+void	tiny_sort_2(t_list *stack)
 {
-	t_stack *tmp;
+	t_list	*curr;
 
-	if (stack->a)
+	curr = stack;
+	if (stack->a == NULL || stack->a->next == NULL)
+		return ;
+	if (curr)
 	{
-		tmp = stack->a;
-		stack->a = stack->a->next;
-			print_stack(stack->a, 1);
-			print_stack(stack->b, 2);
-		tmp->next = stack->b;
-        stack->b = tmp;
-			print_stack(stack->a, 1);
-			print_stack(stack->b, 2);
-		if (show_output("pa\n", stack->show_output) == -1)
-            error_free(stack);
+		if ((curr->a) > (curr->a->next))
+		{
+			if (curr->a > curr->a->next)
+				ss(stack);
+			else
+				return ;
+		}
 	}
+}
+
+// t_list	*find_highest(t_list *stack)
+// {
+// 	int				highest;
+// 	t_list		*highest_node;
+
+// 	// if (stack == NULL)
+// 		// return (NULL);
+// 	highest = INT_MIN;
+// 	while (stack)
+// 	{
+// 		if (stack->a->nb > highest)
+// 		{
+// 			highest = stack->a->nb;
+// 			highest_node = stack;
+// 		}
+// 		stack->a = stack->a->next;
+// 	}
+// 	return (highest_node);
+// }
+
+void tiny_sort_3(t_list *stack) 
+{
+    if (stack->a != NULL) 
+	{
+        if (stack->a->nb > stack->a->next->nb)
+            sa(stack);
+
+		t_list	*last = find_last_node_a(stack);
+			exit(0);
+        if (stack->a->nb > last->a->nb)
+		{
+            print_stack(stack->a, 1);
+            print_stack(stack->b, 2);
+            ra(stack);
+        } 
+		else 
+            return;
+    }
 }
 
 int	main(int argc, char **argv)
@@ -373,19 +406,18 @@ int	main(int argc, char **argv)
 		stack->show_output = 1;
 		if (!is_sort(stack))
 		{
-			if (stack_len(stack) == 2)
+			if (stack_len(stack) < 2)
 			{
-				sa_sb(stack);
-				pa(stack);
+				tiny_sort_2(stack);
 			}
-			else if (stack_len(stack) == 3)
+			else if (stack_len(stack) < 3)
 			{
-				// pa(stack);
-				printf("HERE");
-			// 	tiny_sort(stack);
+				// tiny_sort_3(stack);
 			// else
 			// 	push_swap(stack);
 			}
+			// else 
+				// push_swap(stack);
 		}
 		free_data(stack);
 	}
