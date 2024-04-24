@@ -43,12 +43,20 @@ typedef struct l_list
 
 char	**ft_split(char const *s, char c);
 
+//swap.c
 void	sa(t_list *stack);
 void	sb(t_list *stack);
 void	ss(t_list *stack);
 
+//push.c
 void	pa(t_list *stack);
 
+//main.c
 void print_stack(t_stack *stack, int mode);
+
+//free.c
+void	error_free(t_list *stack);
+void	free_data(t_list *stack);
+char	**free_split(char **data);
 
 #endif

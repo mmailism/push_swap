@@ -34,39 +34,6 @@ void print_stack(t_stack *stack, int mode)
 	}
 }
 
-static void	free_stack(t_stack *stack)
-{
-	t_stack	*tmp;
-
-	while (stack)
-	{
-		tmp = stack;
-		stack = stack->next;
-		free(tmp);
-	}
-}
-
-void	free_data(t_list *stack)
-{
-	if(stack)
-	{
-		if (stack->tmp)
-			free_stack(stack->tmp);
-		if (stack->a)
-			free_stack(stack->a);
-		if (stack->b)
-			free_stack(stack->b);
-		free(stack);
-	}
-}
-
-void	error_free(t_list *stack)
-{
-	free_data(stack);
-	write(2, "Error\n", 6);
-	exit(1);
-}
-
 t_list	*find_last_node_a(t_list *head)
 {
 	if (head == NULL)
@@ -180,21 +147,6 @@ t_stack	*alloc_stack(t_list *lst, t_stack *stack, int nb)
 	new->next = stack;
 	stack = new;
 	return (new);
-}
-
-char	**free_split(char **data)
-{
-	int	i;
-
-	i = 0;
-	while (data[i])
-	{
-		free(data[i]);
-		data[i] = NULL;
-		i++;
-	}
-	free(data);
-	return (NULL);
 }
 
 int	stack_size(t_list *stack, char name)

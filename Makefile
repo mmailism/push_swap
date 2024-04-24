@@ -11,7 +11,8 @@ VPATH = $(SRC_DIR)
 PUSH_SWAP_SRC	=	main.c \
 					utils.c \
 					swap.c \
-					push.c
+					push.c \
+					free.c
 
 PUSH_SWAP_OBJ	=	$(PUSH_SWAP_SRC:%.c=obj/%.o)
 
