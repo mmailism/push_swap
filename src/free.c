@@ -59,3 +59,25 @@ char	**free_split(char **data)
 	free(data);
 	return (NULL);
 }
+
+void print_stack(t_stack *stack, int mode)
+{
+	if (mode == 1)
+	{
+    	printf("stack A: ");
+    	while (stack != NULL) {
+    	    printf("%d ", stack->nb);
+    	    stack = stack->next;
+    	}
+    	printf("\n");
+	}
+	if (mode == 2)
+	{
+    	printf("stack B: ");
+    	while (stack != NULL) {
+    	    printf("%d ", stack->nb);
+    	    stack = stack->next;
+    	}
+    	printf("\n");
+	}
+}

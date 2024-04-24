@@ -12,28 +12,6 @@
 
 #include "./../include/push_swap.h"
 
-void print_stack(t_stack *stack, int mode)
-{
-	if (mode == 1)
-	{
-    	printf("stack A: ");
-    	while (stack != NULL) {
-    	    printf("%d ", stack->nb);
-    	    stack = stack->next;
-    	}
-    	printf("\n");
-	}
-	if (mode == 2)
-	{
-    	printf("stack B: ");
-    	while (stack != NULL) {
-    	    printf("%d ", stack->nb);
-    	    stack = stack->next;
-    	}
-    	printf("\n");
-	}
-}
-
 t_list	*find_last_node_a(t_list *head)
 {
 	if (head == NULL)
