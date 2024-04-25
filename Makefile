@@ -12,7 +12,9 @@ PUSH_SWAP_SRC	=	main.c \
 					utils.c \
 					swap.c \
 					push.c \
-					free.c
+					free.c \
+					rotate.c \
+					reverse.c
 
 PUSH_SWAP_OBJ	=	$(PUSH_SWAP_SRC:%.c=obj/%.o)
 

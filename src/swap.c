@@ -12,6 +12,15 @@
 
 #include "./../include/push_swap.h"
 
+void	swap(int *a, int *b)
+{
+	int	temp;
+
+	temp = *a;
+	*a = *b;
+	*b = temp;
+}
+
 void	sb(t_list *stack)
 {
 	int	tmp;
@@ -38,11 +47,8 @@ void	sa(t_list *stack)
 	if (stack->a && stack->a->next)
 	{
 		tmp = stack->a->next->nb;
-			print_stack(stack->a, 1);
 		stack->a->next->nb = stack->a->nb;
-			print_stack(stack->a, 1);
 		stack->a->nb = tmp;
-			print_stack(stack->a, 1);
 		printf("sa\n");
 			// error_free(stack);
 		// stack->top_a = stack->a;

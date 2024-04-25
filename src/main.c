@@ -238,89 +238,34 @@ int	show_output(char *str, int show)
 	return (1);
 }
 
-void	ra(t_list *stack)
-{
-	t_stack	*head;
-	t_stack	*curr;
-
-		print_stack(stack->a, 1);
-		print_stack(stack->b, 2);
-	if (stack->a == NULL || stack->a->next == NULL)
-		return ;
-	head = stack->a->next;
-	curr = stack->a;
-	while (curr->next != NULL)
-	{
-		curr = curr->next;
-	}
-	curr->next = stack->a;
-	stack->a->next = NULL;
-	stack->a = head;
-		print_stack(stack->a, 1);
-		print_stack(stack->b, 2);
-	printf("ra\n");
-
-	// if (show_output("ra\n", stack->show_output) == -1)
-	// 		return ;
-		// error_free(stack);
-}
-
-void	tiny_sort_2(t_list *stack)
-{
-	t_list	*curr;
-
-	curr = stack;
-	if (stack->a == NULL || stack->a->next == NULL)
-		return ;
-	if (curr)
-	{
-		if ((curr->a) > (curr->a->next))
-		{
-			if (curr->a > curr->a->next)
-				ss(stack);
-			else
-				return ;
-		}
-	}
-}
-
-// t_list	*find_highest(t_list *stack)
-// {
-// 	int				highest;
-// 	t_list		*highest_node;
-
-// 	// if (stack == NULL)
-// 		// return (NULL);
-// 	highest = INT_MIN;
-// 	while (stack)
-// 	{
-// 		if (stack->a->nb > highest)
-// 		{
-// 			highest = stack->a->nb;
-// 			highest_node = stack;
-// 		}
-// 		stack->a = stack->a->next;
-// 	}
-// 	return (highest_node);
-// }
-
 void tiny_sort_3(t_list *stack) 
 {
-    if (stack->a != NULL) 
+    if (stack->a)
 	{
-        if (stack->a->nb > stack->a->next->nb)
-            sa(stack);
-
-		t_list	*last = find_last_node_a(stack);
-			exit(0);
-        if (stack->a->nb > last->a->nb)
+        if (stack->a->nb > stack->a->next->next->nb && stack->a->nb > stack->a->next->nb)
 		{
-            print_stack(stack->a, 1);
-            print_stack(stack->b, 2);
             ra(stack);
-        } 
-		else 
-            return;
+            print_stack(stack->a, 1);
+        }
+		if (stack->a->nb > stack->a->next->nb)
+		{
+			sa(stack);
+            print_stack(stack->a, 1);
+		}
+		if (stack->a->next->nb > stack->a->next->next->nb)
+		{
+			rra(stack);
+            print_stack(stack->a, 1);
+			if (stack->a->nb > stack->a->next->nb)
+			{
+				sa(stack);
+            	print_stack(stack->a, 1);
+			}
+			else
+				return;
+		}
+		else
+			return ;
     }
 }
 
@@ -338,16 +283,15 @@ int	main(int argc, char **argv)
 		{
 			if (stack_len(stack) < 2)
 			{
-				tiny_sort_2(stack);
+				sa(stack);
+				// tiny_sort_2(stack);
 			}
 			else if (stack_len(stack) < 3)
 			{
-				// tiny_sort_3(stack);
+				tiny_sort_3(stack);
 			// else
 			// 	push_swap(stack);
 			}
-			// else 
-				// push_swap(stack);
 		}
 		free_data(stack);
 	}

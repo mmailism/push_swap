@@ -1,36 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_split.c                                         :+:      :+:    :+:   */
+/*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mailism <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: kpueankl <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/25 15:19:07 by kpueankl          #+#    #+#             */
-/*   Updated: 2023/09/22 17:23:10 by mailism          ###   ########.fr       */
+/*   Created: 2024/04/06 16:46:22 by kpueankl          #+#    #+#             */
+/*   Updated: 2024/04/06 16:46:26 by kpueankl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./../include/push_swap.h"
 
-void	pa(t_list *stack)
+void	rra(t_list *stack)
 {
-	t_stack *tmp;
+	t_stack	*prev;
+	t_stack	*current;
 
 	if (stack->a == NULL || stack->a->next == NULL)
 		return ;
-	if (stack->a)
+	current = stack->a;
+	while (current->next != NULL)
 	{
-		tmp = stack->a;
-		stack->a = stack->a->next;
-		tmp->next = stack->b;
-        stack->b = tmp;
-			print_stack(stack->a, 1);
-			print_stack(stack->b, 2);
-		// if (show_output("pa\n", stack->show_output) == -1)
-		// 	return ;
-		printf("pa\n");
-            // error_free(stack);
+		prev = current;
+		current = current->next;
 	}
-	else
-		return ;
+	current->next = stack->a;
+	prev->next = NULL;
+	stack->bottom_a = prev;
+	stack->a = current;
+	stack->top_a = stack->a;
+	printf("rra\n");
 }
