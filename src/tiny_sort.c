@@ -40,13 +40,24 @@ void	tiny_sort_5(t_list *stack)
 {
 	if (stack->a)
 	{
-		if (stack->a > stack->a->next->next)
-			pa(stack);
-		if (stack->a->next > stack->a->next->next)
+		if (stack->a->nb && stack->a->next->nb)
 		{
 			pa(stack);
-			print_stack(stack->a);
-			print_stack(stack->b);
+				print_stack(stack->a, 1);
+				print_stack(stack->b, 2);
+			pa(stack);
+				print_stack(stack->a, 1);
+				print_stack(stack->b, 2);
+		}
+		tiny_sort_3(stack);
+	}
+	if (stack->b)
+	{
+		if (stack->b->nb > stack->b->next->nb)
+		{
+			sb(stack);
+			print_stack(stack->a, 1);
+			print_stack(stack->b, 2);
 		}
 	}
 }

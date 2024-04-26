@@ -24,8 +24,6 @@ void	pa(t_list *stack)
 		stack->a = stack->a->next;
 		tmp->next = stack->b;
         stack->b = tmp;
-			print_stack(stack->a, 1);
-			print_stack(stack->b, 2);
 		// if (show_output("pa\n", stack->show_output) == -1)
 		// 	return ;
 		printf("pa\n");

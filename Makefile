@@ -14,7 +14,11 @@ PUSH_SWAP_SRC	=	main.c \
 					push.c \
 					free.c \
 					rotate.c \
-					reverse.c
+					reverse.c \
+					stack.c \
+					stack_utils.c \
+					print.c \
+					tiny_sort.c
 
 PUSH_SWAP_OBJ	=	$(PUSH_SWAP_SRC:%.c=obj/%.o)
 
