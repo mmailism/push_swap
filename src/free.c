@@ -26,7 +26,7 @@ static void	free_stack(t_stack *stack)
 
 void	free_data(t_list *stack)
 {
-	if(stack)
+	if (stack)
 	{
 		if (stack->tmp)
 			free_stack(stack->tmp);
@@ -60,24 +60,26 @@ char	**free_split(char **data)
 	return (NULL);
 }
 
-void print_stack(t_stack *stack, int mode)
+void	print_stack(t_stack *stack, int mode)
 {
 	if (mode == 1)
 	{
-    	printf("stack A: ");
-    	while (stack != NULL) {
-    	    printf("%d ", stack->nb);
-    	    stack = stack->next;
-    	}
-    	printf("\n");
+		printf("stack A: ");
+		while (stack != NULL)
+		{
+			printf("%d ", stack->nb);
+			stack = stack->next;
+		}
+		printf("\n");
 	}
 	if (mode == 2)
 	{
-    	printf("stack B: ");
-    	while (stack != NULL) {
-    	    printf("%d ", stack->nb);
-    	    stack = stack->next;
-    	}
-    	printf("\n");
+		printf("stack B: ");
+		while (stack != NULL)
+		{
+			printf("%d ", stack->nb);
+			stack = stack->next;
+		}
+		printf("\n");
 	}
 }

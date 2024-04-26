@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   rotate.c                   	                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kpueankl <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -29,10 +29,6 @@ void	ra(t_list *stack)
 	stack->a->next = NULL;
 	stack->a = head;
 	printf("ra\n");
-
-	// if (show_output("ra\n", stack->show_output) == -1)
-	// 		return ;
-		// error_free(stack);
 }
 
 void	rb(t_list *stack)
@@ -52,8 +48,4 @@ void	rb(t_list *stack)
 	stack->b->next = NULL;
 	stack->b = head;
 	printf("rb\n");
-
-	// if (show_output("ra\n", stack->show_output) == -1)
-	// 		return ;
-		// error_free(stack);
 }

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   reverse.c                                        :+:      :+:    :+:   */
+/*   tiny_sort.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kpueankl <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,23 +12,41 @@
 
 #include "./../include/push_swap.h"
 
-void	rra(t_list *stack)
+void	tiny_sort_3(t_list *stack)
 {
-	t_stack	*prev;
-	t_stack	*current;
-
-	if (stack->a == NULL || stack->a->next == NULL)
-		return ;
-	current = stack->a;
-	while (current->next != NULL)
+	if (stack->a)
 	{
-		prev = current;
-		current = current->next;
+		if (stack->a->nb > stack->a->next->next->nb
+			&& stack->a->nb > stack->a->next->nb)
+		{
+			ra(stack);
+		}
+		if (stack->a->nb > stack->a->next->nb)
+			sa(stack);
+		if (stack->a->next->nb > stack->a->next->next->nb)
+		{
+			rra(stack);
+			if (stack->a->nb > stack->a->next->nb)
+				sa(stack);
+			else
+				return ;
+		}
+		else
+			return ;
 	}
-	current->next = stack->a;
-	prev->next = NULL;
-	stack->bottom_a = prev;
-	stack->a = current;
-	stack->top_a = stack->a;
-	printf("rra\n");
+}
+
+void	tiny_sort_5(t_list *stack)
+{
+	if (stack->a)
+	{
+		if (stack->a > stack->a->next->next)
+			pa(stack);
+		if (stack->a->next > stack->a->next->next)
+		{
+			pa(stack);
+			print_stack(stack->a);
+			print_stack(stack->b);
+		}
+	}
 }

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   stack.c	                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kpueankl <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,79 +10,89 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./include/push_swap.h"
+#include "./../include/push_swap.h"
 
-// t_stack	*get_bottom(t_stack *a, t_stack *new)
-// {
-// 	if (a && new)
-// 	{
-// 		new->next = a;
-// 		a = new;
-// 	}
-//     return (a);
-// }
+int	stack_len(t_list *stack)
+{
+	int		count;
+	t_stack	*current;
 
-// t_stack	*stack_init(t_stack *a, t_stack *new)
-// {
-// 	t_stack	*top;
+	count = 0;
+	current = stack->a;
+	while (current->next != NULL)
+	{
+		current = current->next;
+		count++;
+	}
+	return (count);
+}
 
-// 	if (!new)
-// 		return (NULL);
-// 	if (!a)
-// 	{
-// 		a = new;
-// 		return (NULL);
-// 	}
-// 	top = get_bottom(a, new);
-// 	top->next = new;
-// 	return (top);
-// 	// This 'top' variable has asign but doesn't use
-// 	// So we have to return adress top
-// 	// return (top)
-// }
+static int	count_elements(char **data)
+{
+	int	i;
 
-// void	*stack_add(t_stack *stack, t_stack *new)
-// {
-// 	t_stack	*tmp;
+	i = 0;
+	while (data[i])
+		i++;
+	return (i);
+}
 
-//     tmp = stack_last(stack);
-// 	if (tmp == NULL)
-// 		tmp = new;
-// 	else
-// 		tmp->next = new;
-// }
+static char	**split_to_stack(t_list *stack, char *str)
+{
+	char	**data;
+	char	*temp;
+	int		num_elements;
+	int		start;
+	int		end;
 
-// t_stack	*stack_last(t_stack *lst)
-// {
-// 	if (!lst)
-// 		return (lst);
-// 	while (lst->next != 0)
-// 		lst = lst->next;
-// 	return (lst);
-// }
+	data = ft_split(str, ' ');
+	if (!data)
+		error_free(stack);
+	num_elements = count_elements(data);
+	start = 0;
+	end = num_elements - 1;
+	while (start < end)
+	{
+		temp = data[start];
+		data[start] = data[end];
+		data[end] = temp;
+		start++;
+		end--;
+	}
+	return (data);
+}
 
-// t_stack *stack_new(int *new)
-// {
-// 	t_stack	*list;
+void	add_data(t_list *stack, int argc, char **argv)
+{
+	int		nb;
+	char	**data;
+	char	**head;
 
-// 	list = malloc(sizeof(t_stack));
-// 	if (!list)
-// 		return (NULL);
-// 	list->content = *new;
-// 	list->next = NULL;
-// 	return (list);
-// }
+	argc--;
+	while (argc > 0)
+	{
+		data = split_to_stack(stack, argv[argc]);
+		head = data;
+		while (*head)
+		{
+			nb = convert_nb(*head, stack);
+			check_dup(nb, stack);
+			stack->a = alloc_stack(stack, stack->a, nb);
+			head++;
+		}
+		data = free_split(data);
+		argc--;
+	}
+}
 
-// bool	is_sort(t_list *ref)
-// {
-// 	t_stack	*current;
+t_stack	*bottom_stack(t_stack *stack)
+{
+	t_stack	*current;
 
-// 	current = ref->a;
-// 	while (current->next != NULL)
-// 	{
-// 		if ((current->nb > current->next->nb))
-// 			return (false);
-// 		current = current->next;
-// 	}
-// 	return (true);
-// }
+	current = stack;
+	while (current->next)
+	{
+		current = current->next;
+	}
+	return (current);
+}

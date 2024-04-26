@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   reverse.c                                        :+:      :+:    :+:   */
+/*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kpueankl <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,23 +12,11 @@
 
 #include "./../include/push_swap.h"
 
-void	rra(t_list *stack)
+int	show_output(char *str, int show)
 {
-	t_stack	*prev;
-	t_stack	*current;
-
-	if (stack->a == NULL || stack->a->next == NULL)
-		return ;
-	current = stack->a;
-	while (current->next != NULL)
-	{
-		prev = current;
-		current = current->next;
-	}
-	current->next = stack->a;
-	prev->next = NULL;
-	stack->bottom_a = prev;
-	stack->a = current;
-	stack->top_a = stack->a;
-	printf("rra\n");
+	if (show == 0)
+		return (1);
+	if (printf("%s", str) == -1)
+		return (-1);
+	return (1);
 }
