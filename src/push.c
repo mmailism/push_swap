@@ -32,3 +32,22 @@ void	pa(t_list *stack)
 	else
 		return ;
 }
+
+void	pb(t_list *stack)
+{
+	t_stack *tmp;
+
+	if (stack->b)
+	{
+		tmp = stack->b;
+		stack->b = stack->b->next;
+		tmp->next = stack->a;
+        stack->a = tmp;
+		// if (show_output("pa\n", stack->show_output) == -1)
+		// 	return ;
+		printf("pb\n");
+            // error_free(stack);
+	}
+	else
+		return ;
+}

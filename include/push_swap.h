@@ -51,6 +51,7 @@ void	ss(t_list *stack);
 
 //push.c
 void	pa(t_list *stack);
+void	pb(t_list *stack);
 
 //rotate.c
 void	ra(t_list *stack);
@@ -58,6 +59,7 @@ void	rb(t_list *stack);
 
 //reverse.c
 void	rra(t_list *stack);
+void	rrb(t_list *stack);
 
 //main.c
 void	print_stack(t_stack *stack, int mode);
@@ -78,6 +80,8 @@ t_list	*find_last_node_a(t_list *head);
 //tiny_sort.c
 void	tiny_sort_3(t_list *stack);
 void	tiny_sort_5(t_list *stack);
+void	sort_a_b(t_list *stack);
+void	check_pos(t_list *stack);
 
 //free.c
 void	free_data(t_list *stack);

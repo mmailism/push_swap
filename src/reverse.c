@@ -32,3 +32,24 @@ void	rra(t_list *stack)
 	stack->top_a = stack->a;
 	printf("rra\n");
 }
+
+void	rrb(t_list *stack)
+{
+	t_stack	*prev;
+	t_stack	*current;
+
+	if (stack->b == NULL || stack->b->next == NULL)
+		return ;
+	current = stack->b;
+	while (current->next != NULL)
+	{
+		prev = current;
+		current = current->next;
+	}
+	current->next = stack->b;
+	prev->next = NULL;
+	stack->bottom_b = prev;
+	stack->b = current;
+	stack->top_b = stack->b;
+	printf("rrb\n");
+}
