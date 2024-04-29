@@ -71,7 +71,6 @@ static void	rra_rrr(t_list *stack)
 	stack->bottom_a = prev;
 	stack->a = current;
 	stack->top_a = stack->a;
-	// printf("rra\n");
 }
 
 static void	rrb_rrr(t_list *stack)
@@ -92,7 +91,6 @@ static void	rrb_rrr(t_list *stack)
 	stack->bottom_b = prev;
 	stack->b = current;
 	stack->top_b = stack->b;
-	// printf("rrb\n");
 }
 
 void	rrr(t_list *stack)

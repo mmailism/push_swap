@@ -81,9 +81,10 @@ t_list	*find_last_node_a(t_list *head);
 
 //tiny_sort.c
 void	tiny_sort_3(t_list *stack);
+void	tiny_sort_4(t_list *stack);
+
+//tiny_sort_5.c
 void	tiny_sort_5(t_list *stack);
-void	sort_a_b(t_list *stack);
-void	check_pos(t_list *stack);
 
 //free.c
 void	free_data(t_list *stack);

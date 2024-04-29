@@ -65,20 +65,18 @@ int	main(int argc, char **argv)
 	{
 		stack = stack_init(argc, argv);
 		pos_init(stack);
-		stack->show_output = 1;
 		if (!is_sort(stack))
 		{
 			if (stack_len(stack) < 2)
 				sa(stack);
 			else if (stack_len(stack) < 3)
 				tiny_sort_3(stack);
+			else if (stack_len(stack) < 4)
+				tiny_sort_4(stack);
 			else if (stack_len(stack) < 5)
 				tiny_sort_5(stack);
 			else
-			{
 				return (0);
-			//push_swap(stack);
-			}
 		}
 		free_data(stack);
 	}
