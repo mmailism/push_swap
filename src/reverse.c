@@ -53,6 +53,7 @@ void	rrb(t_list *stack)
 	stack->top_b = stack->b;
 	printf("rrb\n");
 }
+
 static void	rra_rrr(t_list *stack)
 {
 	t_stack	*prev;

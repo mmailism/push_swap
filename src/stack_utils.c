@@ -12,7 +12,7 @@
 
 #include "./../include/push_swap.h"
 
-int		convert_nb(char *str_nbr, t_list *stack)
+int	convert_nb(char *str_nbr, t_list *stack)
 {
 	int			neg;
 	long long	res;

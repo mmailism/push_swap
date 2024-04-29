@@ -41,7 +41,6 @@ int	ft_atoi(const char *str)
 	return (num * sign);
 }
 
-
 void	ft_bzero(void *s, size_t n)
 {
 	unsigned char	*i;
@@ -170,14 +169,3 @@ char	**ft_split(char const *s, char c)
 	}
 	return (altw);
 }
-
-// #include <stdio.h>
-
-// int main()
-// {
-// 	char	**tab;
-
-// 	tab = ft_split("tripouille", 0);
-// 	printf("%d\n", tab[1] == NULL);
-// 	return (0);
-// }

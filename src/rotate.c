@@ -66,7 +66,6 @@ static void	ra_rr(t_list *stack)
 	curr->next = stack->a;
 	stack->a->next = NULL;
 	stack->a = head;
-	// printf("ra\n");
 }
 
 static void	rb_rr(t_list *stack)
@@ -85,7 +84,6 @@ static void	rb_rr(t_list *stack)
 	curr->next = stack->b;
 	stack->b->next = NULL;
 	stack->b = head;
-	// printf("rb\n");
 }
 
 void	rr(t_list *stack)
