@@ -36,35 +36,7 @@ void	tiny_sort_3(t_list *stack)
 	}
 }
 
-// if (stack->b->nb > stack->a->next->nb && stack->b->nb < stack->a->next->next->nb)
-// 		{
-// 			rra(stack);
-// 			pa(stack);
-// 			ra(stack);
-// 			ra(stack);
-// 			return ;
-// 		}
-// 		if (stack->b->nb > stack->a->nb && stack->b->nb > stack->a->next->nb
-// 			&& stack->b->nb > stack->a->next->next->nb)
-// 		{
-// 			pa(stack);
-// 			ra(stack);
-// 			return ;
-// 		}
-static void sort4_pos1(t_list *stack)
-{
-	if (stack->a->nb)
-	{
-		pb(stack);
-		tiny_sort_3(stack);
-		pa(stack);
-		ra(stack);
-	}
-	else
-		return ;
-}
-
-static void sort4_pos2(t_list *stack)
+static void	sort4_pos2(t_list *stack)
 {
 	if (stack->a->nb)
 	{
@@ -78,7 +50,7 @@ static void sort4_pos2(t_list *stack)
 		return ;
 }
 
-static void sort4_pos3(t_list *stack)
+static void	sort4_pos3(t_list *stack)
 {
 	if (stack->a->nb)
 	{
@@ -93,7 +65,7 @@ static void sort4_pos3(t_list *stack)
 		return ;
 }
 
-static void sort4_pos4(t_list *stack)
+static void	sort4_pos4(t_list *stack)
 {
 	if (stack->a->nb)
 	{
@@ -109,13 +81,22 @@ static void sort4_pos4(t_list *stack)
 
 void	tiny_sort_4(t_list *stack)
 {
-	if (stack->a->nb > stack->a->next->nb && stack->a->nb > stack->a->next->next->nb
-		&& stack->a->nb > stack->a->next->next->nb && stack->a->nb > stack->a->next->next->next->nb)
-		sort4_pos1(stack);
-	else if (stack->a->next->nb > stack->a->nb && stack->a->next->nb > stack->a->next->next->nb
+	if (stack->a->nb > stack->a->next->nb
+		&& stack->a->nb > stack->a->next->next->nb
+		&& stack->a->nb > stack->a->next->next->nb
+		&& stack->a->nb > stack->a->next->next->next->nb)
+	{
+		pb(stack);
+		tiny_sort_3(stack);
+		pa(stack);
+		ra(stack);
+	}
+	else if (stack->a->next->nb > stack->a->nb
+		&& stack->a->next->nb > stack->a->next->next->nb
 		&& stack->a->next->nb > stack->a->next->next->nb)
 		sort4_pos2(stack);
-	else if (stack->a->next->next->nb > stack->a->nb && stack->a->next->next->nb > stack->a->next->nb
+	else if (stack->a->next->next->nb > stack->a->nb
+		&& stack->a->next->next->nb > stack->a->next->nb
 		&& stack->a->next->next->nb > stack->a->next->next->next->nb)
 		sort4_pos3(stack);
 	else if (stack->a->next->next->next->nb > stack->a->nb
