@@ -74,13 +74,11 @@ int	main(int argc, char **argv)
 				tiny_sort_3(stack);
 			else if (stack_len(stack) < 5)
 				tiny_sort_5(stack);
-			// else
-			// {
-			// 	return (0);
-			// //push_swap(stack);
-			// }
-			print_stack(stack->a, 1);
-			print_stack(stack->b, 1);
+			else
+			{
+				return (0);
+			//push_swap(stack);
+			}
 		}
 		free_data(stack);
 	}

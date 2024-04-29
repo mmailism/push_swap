@@ -64,7 +64,6 @@ void	push_b_pos_2(t_list *stack)
 		if (stack->b->nb > stack->a->nb && stack->b->nb > stack->a->next->nb
 			&& stack->b->nb > stack->a->next->next->nb && stack->b->nb < stack->a->next->next->next->nb)
 		{
-			printf("pos 2: b>a1,2,3, <4\n");
 			pa(stack);
 			rra(stack);
 			ra(stack);
@@ -75,26 +74,22 @@ void	push_b_pos_2(t_list *stack)
 		if (stack->b->nb > stack->a->nb && stack->b->nb > stack->a->next->nb
 			&& stack->b->nb < stack->a->next->next->nb)
 		{
-			printf("pos 2: b>a1,2,<3,4\n");
 			return ;
 		}
 		if (stack->b->nb < stack->a->nb)
 		{
-			printf("pos 2: b<a1,2,3,4\n");
 			pa(stack);
 			return ;
 		}
 		if (stack->b->nb > stack->a->nb && stack->b->nb > stack->a->next->nb
 			&& stack->b->nb > stack->a->next->next->nb && stack->b->nb > stack->a->next->next->next->nb)
 		{
-			printf("pos 2: b>a1,2,3,4\n");
 			pa(stack);
 			ra(stack);
 			return ;
 		}
 		if (stack->b->nb > stack->a->nb && stack->b->nb < stack->a->next->nb)
 		{
-			printf("pos 2: b>a1,< 2,3,4\n");
 			pa(stack);
 			sa(stack);
 		}
@@ -134,7 +129,6 @@ void	b1_less_a2(t_list *stack)
 	if (stack->b->nb > stack->a->nb && stack->b->nb < stack->a->next->nb &&
 		stack->b->next->nb < stack->a->next->nb && stack->b->next != NULL)
 	{
-		printf("1\n");
 		sb(stack);
 		pa(stack);
 		sa(stack);
@@ -168,9 +162,9 @@ void	b1_less_a3(t_list *stack)
 		pa(stack);
 		pa(stack);
 		ra(stack);
+		pa(stack);
 		ra(stack);
-		ra(stack);
-		printf("1\n");
+		pb(stack);
 		return ;
 	}
 	if (stack->b->nb > stack->a->next->nb && stack->b->nb < stack->a->next->next->nb
@@ -180,7 +174,6 @@ void	b1_less_a3(t_list *stack)
 		pa(stack);
 		ra(stack);
 		ra(stack);
-		printf("2\n");
 		return ;
 	}
 	else
@@ -222,9 +215,7 @@ void	push_b_pos_1(t_list *stack)
 			b1_less_a3(stack);
 		}
 		if (stack->b->nb > stack->a->next->next->nb && stack->b->next != NULL)
-			b1_more_a3(stack);
-		else
-			return ;	
+			b1_more_a3(stack);	
 	}
 }
 
@@ -251,12 +242,8 @@ void	tiny_sort_5(t_list *stack)
 		if (stack->b->nb > stack->b->next->nb)
 			sb(stack);
 	}
-	// print_stack(stack->a, 1);
-	// print_stack(stack->b, 1);
 	if (stack->b && stack->b->next != NULL)
 		push_b_pos_1(stack);
 	if (stack->b && stack->b->next == NULL)
 		push_b_pos_2(stack);
-	// print_stack(stack->a, 1);
-	// print_stack(stack->b, 2);
 }
