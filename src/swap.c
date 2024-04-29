@@ -70,8 +70,6 @@ void	ss(t_list *stack)
 			stack->a->next->nb = stack->a->nb;
 			stack->b->nb = tmp;
 		}
-		print_stack(stack->a, 1);
-		print_stack(stack->b, 2);
 		printf("ss\n");
 	}
 	else

@@ -56,10 +56,12 @@ void	pb(t_list *stack);
 //rotate.c
 void	ra(t_list *stack);
 void	rb(t_list *stack);
+void	rr(t_list *stack);
 
 //reverse.c
 void	rra(t_list *stack);
 void	rrb(t_list *stack);
+void	rrr(t_list *stack);
 
 //main.c
 void	print_stack(t_stack *stack, int mode);

@@ -35,82 +35,228 @@ void	tiny_sort_3(t_list *stack)
 			return ;
 	}
 }
-//! find funtion find highest now
-void	sort_a_b(t_list *stack)
+
+void	tiny_sort_4(t_list *stack)
 {
-	if (stack->b && stack->a)
+	if (stack->a && stack->a->next && stack->a->next->next && stack->a->next->next->next)
+	{
+		if (stack->a->nb > stack->a->next->nb
+			&& stack->a->nb > stack->a->next->next->nb && stack->a->nb < stack->a->next->next->next->nb)
+		{
+			rra(stack);
+			pb(stack);
+			tiny_sort_3(stack);
+		}
+		if (stack->b->nb > stack->a->nb && stack->b->nb > stack->a->next->nb && stack->b->nb > stack->a->next->next->nb)
+		{
+			pa(stack);
+			ra(stack);
+		}
+		else
+			return ;
+	}
+}
+
+void	push_b_pos_2(t_list *stack)
+{
+	if (stack->b && stack->b->next == NULL)
 	{
 		if (stack->b->nb > stack->a->nb && stack->b->nb > stack->a->next->nb
-			&& stack->b->nb > stack->a->next->next->nb)
+			&& stack->b->nb > stack->a->next->next->nb && stack->b->nb < stack->a->next->next->next->nb)
 		{
-			pb(stack);
+			printf("pos 2: b>a1,2,3, <4\n");
+			pa(stack);
+			rra(stack);
 			ra(stack);
-			print_stack(stack->a, 1);
-			print_stack(stack->b, 2);
+			pa(stack);
+			ra(stack);
+			return;
 		}
 		if (stack->b->nb > stack->a->nb && stack->b->nb > stack->a->next->nb
 			&& stack->b->nb < stack->a->next->next->nb)
 		{
-			pb(stack);
-			print_stack(stack->a, 1);
-			print_stack(stack->b, 2);
-			ra(stack);
-						print_stack(stack->a, 1);
-			print_stack(stack->b, 2);
-		}
-		if (stack->b->nb > stack->a->nb && stack->b->nb > stack->a->next->nb
-			&& stack->b->nb < stack->a->next->next->nb)
-		{
-			pb(stack);
-			print_stack(stack->a, 1);
-			print_stack(stack->b, 2);
+			printf("pos 2: b>a1,2,<3,4\n");
+			return ;
 		}
 		if (stack->b->nb < stack->a->nb)
 		{
-			pb(stack);
-			print_stack(stack->a, 1);
-			print_stack(stack->b, 2);
+			printf("pos 2: b<a1,2,3,4\n");
+			pa(stack);
+			return ;
+		}
+		if (stack->b->nb > stack->a->nb && stack->b->nb > stack->a->next->nb
+			&& stack->b->nb > stack->a->next->next->nb && stack->b->nb > stack->a->next->next->next->nb)
+		{
+			printf("pos 2: b>a1,2,3,4\n");
+			pa(stack);
+			ra(stack);
+			return ;
+		}
+		if (stack->b->nb > stack->a->nb && stack->b->nb < stack->a->next->nb)
+		{
+			printf("pos 2: b>a1,< 2,3,4\n");
+			pa(stack);
+			sa(stack);
 		}
 	}
 }
 
-void	check_pos(t_list *stack)
+void	b1_less_all_a(t_list *stack)
 {
-	if (stack->a->nb > stack->a->next->nb
-		&& stack->a->nb > stack->a->next->next->nb
-		&& stack->a->nb > stack->a->next->next->next->nb
-		&& stack->a->nb > stack->a->next->next->next->next->nb)
+	if (stack->b->nb < stack->a->nb && stack->b->next->nb > stack->a->nb && 
+		stack->b->next->nb < stack->a->next->nb && stack->b->next != NULL)
+	{
+		sb(stack);
+		pa(stack);
+		sa(stack);
+		return ;
+	}
+	if (stack->b->nb < stack->a->nb && stack->b->next->nb > stack->a->next->nb
+		&& stack->b->next->nb < stack->a->next->next->nb && stack->b->next != NULL)
+	{
+		sb(stack);
+		rra(stack);
+		pa(stack);
+		ra(stack);
+		ra(stack);
+		return ;
+	}
+	if (stack->b->nb < stack->a->nb && stack->b->next->nb > stack->a->next->nb
+		&& stack->b->next->nb > stack->a->next->next->nb && stack->b->next != NULL)
 	{
 		pa(stack);
+		return ;
+	}
+}
+
+void	b1_less_a2(t_list *stack)
+{
+	if (stack->b->nb > stack->a->nb && stack->b->nb < stack->a->next->nb &&
+		stack->b->next->nb < stack->a->next->nb && stack->b->next != NULL)
+	{
+		printf("1\n");
+		sb(stack);
+		pa(stack);
+		sa(stack);
+		return ;
+	}
+	if (stack->b->nb > stack->a->nb && stack->b->nb < stack->a->next->nb &&
+		stack->b->next->nb > stack->a->next->nb &&
+		stack->b->next->nb < stack->a->next->next->nb && stack->b->next != NULL)
+	{
+		rrr(stack);
+		pa(stack);
+		ra(stack);
+		ra(stack);
+		return ;
+	}
+	if (stack->b->nb > stack->a->nb && stack->b->nb < stack->a->next->nb &&
+		stack->b->next->nb > stack->a->next->nb &&
+		stack->b->next->nb > stack->a->next->next->nb && stack->b->next != NULL)
+	{
+		pa(stack);
+		sa(stack);
+	}
+}
+
+void	b1_less_a3(t_list *stack)
+{
+	if (stack->b->nb > stack->a->next->nb && stack->b->nb < stack->a->next->next->nb
+		&& stack->b->next->nb < stack->a->next->next->nb && stack->b->next != NULL)
+	{
+		rrr(stack);
+		pa(stack);
+		pa(stack);
+		ra(stack);
+		ra(stack);
+		ra(stack);
+		printf("1\n");
+		return ;
+	}
+	if (stack->b->nb > stack->a->next->nb && stack->b->nb < stack->a->next->next->nb
+		&& stack->b->next->nb > stack->a->next->next->nb && stack->b->next != NULL)
+	{
+		rra(stack);
+		pa(stack);
+		ra(stack);
+		ra(stack);
+		printf("2\n");
+		return ;
 	}
 	else
 		return ;
 }
 
+void	b1_more_a3(t_list *stack)
+{
+	if (stack->b->nb > stack->a->next->next->nb && stack->b->next->nb > stack->a->next->next->nb
+		&& stack->b->next != NULL)
+	{
+		pa(stack);
+		ra(stack);
+		return ;
+	}
+}
+
+//! find funtion find highest now
+
+void	push_b_pos_1(t_list *stack)
+{
+	if (stack->a && stack->b && stack->b->next != NULL)
+	{
+		if (stack->b->nb < stack->a->nb && stack->b->next != NULL)
+		{
+			if (stack->b->nb < stack->a->nb && stack->b->next->nb < stack->a->nb && stack->b->next != NULL)
+			{
+				sb(stack);
+				pa(stack);
+				return ;
+			}
+			b1_less_all_a(stack);
+		}
+		if (stack->b->nb > stack->a->nb && stack->b->nb < stack->a->next->nb && stack->b->next != NULL)
+			b1_less_a2(stack);
+		if (stack->b->nb > stack->a->next->nb && stack->b->nb < stack->a->next->next->nb 
+			&& stack->b->next != NULL)
+		{
+			b1_less_a3(stack);
+		}
+		if (stack->b->nb > stack->a->next->next->nb && stack->b->next != NULL)
+			b1_more_a3(stack);
+		else
+			return ;	
+	}
+}
+
 void	tiny_sort_5(t_list *stack)
 {
-
 	if (stack->a)
 	{
-		if (stack->a)
+		if (stack->a->nb > stack->a->next->next->next->next->nb && stack->a->nb > stack->a->next->next->next->nb
+			&& stack->a->nb > stack->a->next->next->nb && stack->a->nb > stack->a->next->nb)
 		{
-			// check_pos(stack);
-			pa(stack);
-			pa(stack);
-			tiny_sort_3(stack);
-				print_stack(stack->a, 1);
-				print_stack(stack->b, 2);
-			
+			if (stack->a->next->nb < stack->a->next->next->nb
+			&& stack->a->next->next->nb < stack->a->next->next->next->nb && stack->a->next->next->next->nb < stack->a->next->next->next->next->nb )
+			{
+				ra(stack);
+				return ;
+			}
 		}
+		pb(stack);
+		pb(stack);
+		tiny_sort_3(stack);
 	}
 	if (stack->b)
 	{
-		if (stack->b->nb < stack->b->next->nb)
-		{
+		if (stack->b->nb > stack->b->next->nb)
 			sb(stack);
-			print_stack(stack->a, 1);
-				print_stack(stack->b, 2);
-		}
 	}
-	sort_a_b(stack);
+	// print_stack(stack->a, 1);
+	// print_stack(stack->b, 1);
+	if (stack->b && stack->b->next != NULL)
+		push_b_pos_1(stack);
+	if (stack->b && stack->b->next == NULL)
+		push_b_pos_2(stack);
+	// print_stack(stack->a, 1);
+	// print_stack(stack->b, 2);
 }

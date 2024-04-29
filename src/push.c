@@ -16,14 +16,12 @@ void	pa(t_list *stack)
 {
 	t_stack *tmp;
 
-	if (stack->a == NULL || stack->a->next == NULL)
-		return ;
-	if (stack->a)
+	if (stack->b)
 	{
-		tmp = stack->a;
-		stack->a = stack->a->next;
-		tmp->next = stack->b;
-        stack->b = tmp;
+		tmp = stack->b;
+		stack->b = stack->b->next;
+		tmp->next = stack->a;
+        stack->a = tmp;
 		// if (show_output("pa\n", stack->show_output) == -1)
 		// 	return ;
 		printf("pa\n");
@@ -37,12 +35,12 @@ void	pb(t_list *stack)
 {
 	t_stack *tmp;
 
-	if (stack->b)
+	if (stack->a)
 	{
-		tmp = stack->b;
-		stack->b = stack->b->next;
-		tmp->next = stack->a;
-        stack->a = tmp;
+		tmp = stack->a;
+		stack->a = stack->a->next;
+		tmp->next = stack->b;
+        stack->b = tmp;
 		// if (show_output("pa\n", stack->show_output) == -1)
 		// 	return ;
 		printf("pb\n");
