@@ -55,7 +55,7 @@ static bool	is_sort(t_list *ref)
 	}
 	return (true);
 }
-
+//!now crreate big sort
 int	main(int argc, char **argv)
 {
 	t_list	*stack;
