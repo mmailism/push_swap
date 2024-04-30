@@ -76,7 +76,7 @@ int	main(int argc, char **argv)
 			else if (stack_len(stack) < 5)
 				tiny_sort_5(stack);
 			else
-				return (0);
+				big_sort(stack);
 		}
 		free_data(stack);
 	}

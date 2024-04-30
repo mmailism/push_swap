@@ -25,7 +25,9 @@ typedef struct l_list
 {
 	int		size_a;
 	int		size_b;
-	int		show_output;
+	int		max;
+	int		min;
+	int		mid;
 	t_stack	*a;
 	t_stack	*b;
 	t_stack	*top_a;
@@ -85,6 +87,9 @@ void	tiny_sort_4(t_list *stack);
 
 //tiny_sort_5.c
 void	tiny_sort_5(t_list *stack);
+
+//big_sort.c
+void	big_sort(t_list *stack);
 
 //free.c
 void	free_data(t_list *stack);

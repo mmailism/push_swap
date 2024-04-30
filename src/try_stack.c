@@ -125,80 +125,141 @@
 // }
 
 
+// #include <stdio.h>
+// #include <stdlib.h>
+
+// // Structure for a node in the linked list
+// typedef struct node {
+//     int data;
+//     struct node* next;
+// } l_node;
+
+// // Function to create a new node
+// l_node* createNode(int data) {
+//     l_node* newNode = (l_node*)malloc(sizeof(l_node));
+//     if (newNode == NULL) {
+//         printf("Memory allocation failed!\n");
+//         exit(EXIT_FAILURE);
+//     }
+//     newNode->data = data;
+//     newNode->next = NULL;
+//     return newNode;
+// }
+
+// // Function to print the elements of the linked list
+// void printList(l_node *head) {
+//     printf("Linked list: ");
+//     while (head != NULL) {
+//         printf("%d ", head->data);
+//         head = head->next;
+//     }
+//     printf("\n");
+// }
+
+// // Function to swap the first two elements and move the first element to the end
+// void swapAndMove(l_node **head) {
+//     if (*head == NULL || (*head)->next == NULL) {
+//         // If the list is empty or has only one element, no swapping is needed
+//         return;
+//     }
+    
+//     // Swap the first two elements
+//     l_node *first = *head;
+//     l_node *second = (*head)->next;
+//     *head = second;
+//     first->next = second->next;
+//     second->next = first;
+    
+//     // Move the first element to the end
+//     l_node *last = *head;
+//     while (last->next != NULL) {
+//         last = last->next;
+//     }
+//     last->next = first;
+//     first->next = NULL;
+// }
+
+// int main() {
+//     // Create the linked list with the given input
+//     l_node *head = createNode(5);
+//     head->next = createNode(4);
+//     head->next->next = createNode(1);
+
+//     // Print the initial linked list
+//     printf("Initial ");
+//     printList(head);
+
+//     // Perform the required operations
+//     swapAndMove(&head);
+
+//     // Print the modified linked list
+//     printf("Modified ");
+//     printList(head);
+
+//     // Free the allocated memory
+//     while (head != NULL) {
+//         l_node *temp = head;
+//         head = head->next;
+//         free(temp);
+//     }
+
+//     return 0;
+// }
+
+
 #include <stdio.h>
 #include <stdlib.h>
 
-// Structure for a node in the linked list
-typedef struct node {
+// Define the structure of a node
+struct Node {
     int data;
-    struct node* next;
-} l_node;
+    struct Node* next;
+};
+
+// Function to find the maximum value in the linked list
+int findMax(struct Node* head) {
+    // Initialize max_val to store the maximum value found so far
+    int max_val = head->data; // assuming the list is not empty
+    
+    // Traverse the linked list
+    while (head != NULL) {
+        // Update max_val if the current node's value is greater
+        if (head->data > max_val) {
+            max_val = head->data;
+        }
+        // Move to the next node
+        head = head->next;
+    }
+    
+    return max_val;
+}
 
 // Function to create a new node
-l_node* createNode(int data) {
-    l_node* newNode = (l_node*)malloc(sizeof(l_node));
-    if (newNode == NULL) {
-        printf("Memory allocation failed!\n");
-        exit(EXIT_FAILURE);
-    }
+struct Node* createNode(int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
     newNode->data = data;
     newNode->next = NULL;
     return newNode;
 }
 
-// Function to print the elements of the linked list
-void printList(l_node *head) {
-    printf("Linked list: ");
-    while (head != NULL) {
-        printf("%d ", head->data);
-        head = head->next;
-    }
-    printf("\n");
-}
-
-// Function to swap the first two elements and move the first element to the end
-void swapAndMove(l_node **head) {
-    if (*head == NULL || (*head)->next == NULL) {
-        // If the list is empty or has only one element, no swapping is needed
-        return;
-    }
-    
-    // Swap the first two elements
-    l_node *first = *head;
-    l_node *second = (*head)->next;
-    *head = second;
-    first->next = second->next;
-    second->next = first;
-    
-    // Move the first element to the end
-    l_node *last = *head;
-    while (last->next != NULL) {
-        last = last->next;
-    }
-    last->next = first;
-    first->next = NULL;
-}
-
+// Main function
 int main() {
-    // Create the linked list with the given input
-    l_node *head = createNode(5);
-    head->next = createNode(4);
-    head->next->next = createNode(1);
+    // Create a sample linked list: 3 -> 7 -> 2 -> 9 -> 5
+    struct Node* head = createNode(3);
+    head->next = createNode(7);
+    head->next->next = createNode(2);
+    head->next->next->next = createNode(9);
+    head->next->next->next->next = createNode(5);
 
-    // Print the initial linked list
-    printf("Initial ");
-    printList(head);
+    // Find the maximum value in the linked list
+    int max_val = findMax(head);
 
-    // Perform the required operations
-    swapAndMove(&head);
+    // Print the maximum value
+    printf("The maximum value in the linked list is: %d\n", max_val);
 
-    // Print the modified linked list
-    printf("Modified ");
-    printList(head);
-
-    // Free the allocated memory
+    // Free memory allocated for nodes
     while (head != NULL) {
-        l_node *temp = head;
+        struct Node* temp = head;
         head = head->next;
         free(temp);
     }
