@@ -36,8 +36,6 @@ void	rb(t_list *stack)
 	t_stack	*head;
 	t_stack	*curr;
 
-	if (stack->b == NULL || stack->b->next == NULL)
-		return ;
 	head = stack->b->next;
 	curr = stack->b;
 	while (curr->next != NULL)

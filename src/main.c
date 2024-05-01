@@ -6,7 +6,7 @@
 /*   By: iammai <iammai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 16:46:22 by kpueankl          #+#    #+#             */
-/*   Updated: 2024/05/01 13:28:29 by iammai           ###   ########.fr       */
+/*   Updated: 2024/05/01 17:30:01 by iammai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static void	pos_init(t_list *stack)
 	stack->bottom_b = NULL;
 }
 
-static bool	is_sort(t_list *ref)
+bool	is_sort(t_list *ref)
 {
 	t_stack	*current;
 
@@ -82,6 +82,8 @@ int	main(int argc, char **argv)
 			else
 				big_sort(stack);
 		}
+		print_stack(stack->a, 1);
+		print_stack(stack->b, 2);
 		free_data(stack);
 	}
 }

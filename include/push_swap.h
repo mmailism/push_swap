@@ -68,6 +68,7 @@ void	rrr(t_list *stack);
 //main.c
 void	print_stack(t_stack *stack, int mode);
 void	error_free(t_list *stack);
+bool	is_sort(t_list *ref);
 
 //stack.c
 int		stack_len(t_list *stack);
@@ -90,6 +91,10 @@ void	tiny_sort_5(t_list *stack);
 
 //big_sort.c
 void	big_sort(t_list *stack);
+// int	find_mid(t_list *stack);
+
+//big_sort_utils.c
+void    more_mid(t_list *stack);
 
 //free.c
 void	free_data(t_list *stack);

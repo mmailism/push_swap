@@ -207,62 +207,135 @@
 // }
 
 
-#include <stdio.h>
-#include <stdlib.h>
+// #include <stdio.h>
+// #include <stdlib.h>
 
-// Define the structure of a node
-struct Node {
-    int data;
-    struct Node* next;
-};
+// // Define the structure of a node
+// struct Node {
+//     int data;
+//     struct Node* next;
+// };
 
-// Function to find the maximum value in the linked list
-int findMax(struct Node* head) {
-    // Initialize max_val to store the maximum value found so far
-    int max_val = head->data; // assuming the list is not empty
+// // Function to find the maximum value in the linked list
+// int findMax(struct Node* head) {
+//     // Initialize max_val to store the maximum value found so far
+//     int max_val = head->data; // assuming the list is not empty
     
-    // Traverse the linked list
-    while (head != NULL) {
-        // Update max_val if the current node's value is greater
-        if (head->data > max_val) {
-            max_val = head->data;
-        }
-        // Move to the next node
-        head = head->next;
-    }
+//     // Traverse the linked list
+//     while (head != NULL) {
+//         // Update max_val if the current node's value is greater
+//         if (head->data > max_val) {
+//             max_val = head->data;
+//         }
+//         // Move to the next node
+//         head = head->next;
+//     }
     
-    return max_val;
-}
+//     return max_val;
+// }
 
-// Function to create a new node
-struct Node* createNode(int data) {
-    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
-    newNode->data = data;
-    newNode->next = NULL;
-    return newNode;
-}
+// // Function to create a new node
+// struct Node* createNode(int data) {
+//     struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+//     newNode->data = data;
+//     newNode->next = NULL;
+//     return newNode;
+// }
 
-// Main function
-int main() {
-    // Create a sample linked list: 3 -> 7 -> 2 -> 9 -> 5
-    struct Node* head = createNode(3);
-    head->next = createNode(7);
-    head->next->next = createNode(2);
-    head->next->next->next = createNode(9);
-    head->next->next->next->next = createNode(5);
+// // Main function
+// int main() {
+//     // Create a sample linked list: 3 -> 7 -> 2 -> 9 -> 5
+//     struct Node* head = createNode(3);
+//     head->next = createNode(7);
+//     head->next->next = createNode(2);
+//     head->next->next->next = createNode(9);
+//     head->next->next->next->next = createNode(5);
 
-    // Find the maximum value in the linked list
-    int max_val = findMax(head);
+//     // Find the maximum value in the linked list
+//     int max_val = findMax(head);
 
-    // Print the maximum value
-    printf("The maximum value in the linked list is: %d\n", max_val);
+//     // Print the maximum value
+//     printf("The maximum value in the linked list is: %d\n", max_val);
 
-    // Free memory allocated for nodes
-    while (head != NULL) {
-        struct Node* temp = head;
-        head = head->next;
-        free(temp);
-    }
+//     // Free memory allocated for nodes
+//     while (head != NULL) {
+//         struct Node* temp = head;
+//         head = head->next;
+//         free(temp);
+//     }
 
-    return 0;
-}
+//     return 0;
+// }
+
+// #include <stdio.h>
+// #include <stdlib.h>
+// #include <time.h>
+
+// // Define the structure of a node
+// typedef struct s_stack {
+//     int nb;
+//     struct s_stack *next;
+// } t_stack;
+
+// // Function to create a new node
+// t_stack *new_node(int nb) {
+//     t_stack *node = (t_stack *)malloc(sizeof(t_stack));
+//     if (node == NULL) {
+//         fprintf(stderr, "Memory allocation failed\n");
+//         exit(EXIT_FAILURE);
+//     }
+//     node->nb = nb;
+//     node->next = NULL;
+//     return node;
+// }
+
+// // Function to push a node onto the stack
+// void push(t_stack **stack, int nb) {
+//     t_stack *node = new_node(nb);
+//     if (*stack == NULL || nb < (*stack)->nb) {
+//         node->next = *stack;
+//         *stack = node;
+//     } else {
+//         t_stack *current = *stack;
+//         while (current->next != NULL && nb > current->next->nb) {
+//             current = current->next;
+//         }
+//         node->next = current->next;
+//         current->next = node;
+//     }
+// }
+
+// // Function to print the stack
+// void print_stack(t_stack *stack) {
+//     printf("Stack: ");
+//     while (stack != NULL) {
+//         printf("%d ", stack->nb);
+//         stack = stack->next;
+//     }
+//     printf("\n");
+// }
+
+// int main() {
+//     srand(time(NULL));
+
+//     t_stack *stack = NULL;
+
+//     // Display stack before sorting
+//     printf("Before sorting:\n");
+//     print_stack(stack);
+//     printf("\n");
+
+//     // Generate and push 100 random integers onto the stack
+//     for (int i = 0; i < 100; i++) {
+//         int num = rand() % 1000; // Generating random integers between 0 and 999
+//         push(&stack, num);
+//     }
+
+//     // Display stack after pushing
+//     printf("After pushing:\n");
+//     // print_stack(stack);
+//     printf("\n");
+
+//     return 0;
+// }
+
