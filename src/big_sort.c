@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tiny_sort_5.c                 	                    :+:      :+:    :+:   */
+/*   big_sort.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kpueankl <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: iammai <iammai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/06 16:46:22 by kpueankl          #+#    #+#             */
-/*   Updated: 2024/04/06 16:46:26 by kpueankl         ###   ########.fr       */
+/*   Created: 2024/05/01 13:25:27 by iammai            #+#    #+#             */
+/*   Updated: 2024/05/01 13:51:22 by iammai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	find_max(t_list *stack)
 		curr = curr->next;
     }
 	stack->max = max;
-	return (max);
+	return (stack->max);
 }
 
 int	find_min(t_list *stack)
@@ -70,17 +70,30 @@ int	find_mid(t_list *stack)
 	min = find_min(stack);
 	mid = (max + min) / 2;
 	stack->mid = mid;
-    printf("The middle value between %d and %d is: %d\n", min, max, mid);
-	printf("%d\n", mid);
+    // printf("The middle value between %d and %d is: %d\n", min, max, mid);
+	// printf("%d\n", mid);
     return (mid);
 }
 
 void	push(t_list *stack)
 {
-	if (stack->a)
+	int		max;
+	int		min;
+	int		mid;
+	t_stack *curr;
+
+	max = find_max(stack);
+	min = find_min(stack);
+	mid = find_mid(stack);
+	curr = stack->a->next;
+    printf("The middle value between %d and %d is: %d\n", min, max, mid);
+	while (curr != NULL)
 	{
-		if (stack->a->nb <= max)
-			pb(stack);
+		if (stack->a->nb < max)
+		{
+			ra(stack);
+		}
+		curr = curr->next;
 	}
 	return ;
 }
@@ -92,11 +105,10 @@ void	big_sort(t_list *stack)
 	// int	mid;
 	if (stack_len(stack) < 100)
 	{
-		find_max(stack);
-		find_min(stack);
-		find_mid(stack);
 		print_stack(stack->a, 1);
-		// push_sort(stack);
+		push(stack);
+		print_stack(stack->a, 1);
+		print_stack(stack->b, 2);
 	}
 	if (stack_len(stack) < 500 && stack_len(stack) > 100)
 		printf("sort500\n");

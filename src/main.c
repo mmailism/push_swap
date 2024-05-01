@@ -3,14 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kpueankl <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: iammai <iammai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 16:46:22 by kpueankl          #+#    #+#             */
-/*   Updated: 2024/04/06 16:46:26 by kpueankl         ###   ########.fr       */
+/*   Updated: 2024/05/01 13:28:29 by iammai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./../include/push_swap.h"
+
+//! comment
+//? comment
+//* comment
 
 static t_list	*alloc_list(void)
 {
@@ -55,7 +59,7 @@ static bool	is_sort(t_list *ref)
 	}
 	return (true);
 }
-//!now crreate big sort
+//? now crreate big sort
 int	main(int argc, char **argv)
 {
 	t_list	*stack;
