@@ -16,6 +16,12 @@ typedef struct l_stack
 {
 	int				nb;
 	int				sort;
+	int				current_position;
+	int				final_index;
+	int				push_count;
+	bool			above_median;
+	bool			cheapest;
+	struct l_stack	*target_number;
 	struct l_stack	*last;
 	struct l_stack	*next;
 	struct l_stack	*prev;
@@ -23,8 +29,8 @@ typedef struct l_stack
 
 typedef struct l_list
 {
-	int		size_a;
-	int		size_b;
+	// int		size_a;
+	// int		size_b;
 	int		max;
 	int		min;
 	int		mid;

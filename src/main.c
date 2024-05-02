@@ -6,7 +6,7 @@
 /*   By: iammai <iammai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 16:46:22 by kpueankl          #+#    #+#             */
-/*   Updated: 2024/05/01 17:30:01 by iammai           ###   ########.fr       */
+/*   Updated: 2024/05/02 13:53:36 by iammai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,9 @@ bool	is_sort(t_list *ref)
 	}
 	return (true);
 }
-//? now crreate big sort
+
+//! now crreate big sort
+
 int	main(int argc, char **argv)
 {
 	t_list	*stack;
