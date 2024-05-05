@@ -6,7 +6,7 @@
 /*   By: iammai <iammai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 16:46:22 by kpueankl          #+#    #+#             */
-/*   Updated: 2024/05/02 13:53:36 by iammai           ###   ########.fr       */
+/*   Updated: 2024/05/03 17:45:23 by iammai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,17 +60,30 @@ bool	is_sort(t_list *ref)
 	return (true);
 }
 
+void	start_init(int argc, char **argv, t_list *stack)
+{
+	if (argc > 1)
+	{
+		stack = stack_init(argc, argv);
+		// a = stack_init(argc, argv);
+		// b = stack_init(argc, argv);
+		pos_init(stack);
+	}
+}
 //! now crreate big sort
 
 int	main(int argc, char **argv)
 {
 	t_list	*stack;
+	// t_stack	*a;
+	// t_stack	*b;
 
+	// a = NULL;
+	// b = NULL;
 	stack = NULL;
 	if (argc > 1)
 	{
 		stack = stack_init(argc, argv);
-		pos_init(stack);
 		if (!is_sort(stack))
 		{
 			if (stack_len(stack) < 2)
@@ -82,10 +95,9 @@ int	main(int argc, char **argv)
 			else if (stack_len(stack) < 5)
 				tiny_sort_5(stack);
 			else
-				big_sort(stack);
+				many_big_sort(stack);
 		}
 		print_stack(stack->a, 1);
-		print_stack(stack->b, 2);
 		free_data(stack);
 	}
 }

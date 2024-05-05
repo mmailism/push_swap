@@ -15,7 +15,7 @@
 typedef struct l_stack
 {
 	int				nb;
-	int				sort;
+	int				value;
 	int				current_position;
 	int				final_index;
 	int				push_count;
@@ -96,7 +96,7 @@ void	tiny_sort_4(t_list *stack);
 void	tiny_sort_5(t_list *stack);
 
 //big_sort.c
-void	big_sort(t_list *stack);
+void	bigsort(t_list *stack);
 // int	find_mid(t_list *stack);
 
 //big_sort_utils.c
@@ -109,5 +109,7 @@ void	print_stack(t_stack *stack, int mode);
 
 //print.c
 int		show_output(char *str, int show);
+
+void	sort_many(t_list *stack, int argc);
 
 #endif

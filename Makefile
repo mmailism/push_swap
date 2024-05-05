@@ -21,7 +21,8 @@ PUSH_SWAP_SRC	=	main.c \
 					tiny_sort.c \
 					tiny_sort_5.c \
 					big_sort.c \
-					big_sort_utils.c
+					big_sort_utils.c \
+					butterfly_sort.c
 
 PUSH_SWAP_OBJ	=	$(PUSH_SWAP_SRC:%.c=obj/%.o)
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stack_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kpueankl <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: iammai <iammai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 16:46:22 by kpueankl          #+#    #+#             */
-/*   Updated: 2024/04/06 16:46:26 by kpueankl         ###   ########.fr       */
+/*   Updated: 2024/05/03 17:41:24 by iammai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ t_stack	*alloc_stack(t_list *lst, t_stack *stack, int nb)
 	if (!new)
 		error_free(lst);
 	new->nb = nb;
-	new->sort = 0;
+	// new->sort = 0;
 	new->next = stack;
 	stack = new;
 	return (new);

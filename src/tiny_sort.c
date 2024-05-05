@@ -6,7 +6,7 @@
 /*   By: iammai <iammai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 16:46:22 by kpueankl          #+#    #+#             */
-/*   Updated: 2024/05/01 13:25:50 by iammai           ###   ########.fr       */
+/*   Updated: 2024/05/05 16:23:14 by iammai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,6 @@ static void	sort4_pos2(t_list *stack)
 		pa(stack);
 		ra(stack);
 	}
-	else
-		return ;
 }
 
 static void	sort4_pos3(t_list *stack)
@@ -61,8 +59,6 @@ static void	sort4_pos3(t_list *stack)
 		pa(stack);
 		ra(stack);
 	}
-	else
-		return ;
 }
 
 static void	sort4_pos4(t_list *stack)
@@ -75,8 +71,6 @@ static void	sort4_pos4(t_list *stack)
 		pa(stack);
 		ra(stack);
 	}
-	else
-		return ;
 }
 
 void	tiny_sort_4(t_list *stack)
@@ -103,6 +97,5 @@ void	tiny_sort_4(t_list *stack)
 		&& stack->a->next->next->next->nb > stack->a->next->nb
 		&& stack->a->next->next->next->nb > stack->a->next->next->nb)
 		sort4_pos4(stack);
-	else
-		return ;
+	print_stack((*stack_a)->nbr);
 }

@@ -6,7 +6,7 @@
 /*   By: iammai <iammai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 13:25:27 by iammai            #+#    #+#             */
-/*   Updated: 2024/05/02 16:40:23 by iammai           ###   ########.fr       */
+/*   Updated: 2024/05/03 17:43:51 by iammai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,54 +138,54 @@ void	finish_rotation(t_stack *stack_name, t_stack *smallest_number,
 	}
 }
 
-t_stack	*return_cheapest(t_stack *stack)
-{
-	if (stack == NULL)
-		return (NULL);
-	while (stack)
-	{
-		if (stack->cheapest)
-			return (stack);
-		stack = stack->next;
-	}
-	return (NULL);
-}
+// t_stack	*return_cheapest(t_stack *stack)
+// {
+// 	if (stack == NULL)
+// 		return (NULL);
+// 	while (stack)
+// 	{
+// 		if (stack->cheapest)
+// 			return (stack);
+// 		stack = stack->next;
+// 	}
+// 	return (NULL);
+// }
 
-static void	rotate_both(t_stack *a, t_stack *b, t_stack *cheapest_number, t_list *stack)
-{
-	while (a != cheapest_number->target_number
-		&& b != cheapest_number)
-		rr(stack);
-	set_current_pos(a);
-	set_current_pos(b);
-}
+// static void	rotate_both(t_stack *a, t_stack *b, t_stack *cheapest_number, t_list *stack)
+// {
+// 	while (a != cheapest_number->target_number
+// 		&& b != cheapest_number)
+// 		rr(stack);
+// 	set_current_pos(a);
+// 	set_current_pos(b);
+// }
 
-static void	reverse_rotate_both(t_stack *a, t_stack *b,
-								t_stack *cheapest_number,
-								t_list *stack)
-{
-	while (a != cheapest_number->target_number
-		&& b != cheapest_number)
-		rrr(stack);
-	set_current_pos(a);
-	set_current_pos(b);
-}
+// static void	reverse_rotate_both(t_stack *a, t_stack *b,
+// 								t_stack *cheapest_number,
+// 								t_list *stack)
+// {
+// 	while (a != cheapest_number->target_number
+// 		&& b != cheapest_number)
+// 		rrr(stack);
+// 	set_current_pos(a);
+// 	set_current_pos(b);
+// }
 
-static void	move_price(t_stack *a, t_stack *b, t_list *stack)
-{
-	t_stack	*cheapest_number;
+// static void	move_price(t_stack *a, t_stack *b, t_list *stack)
+// {
+// 	t_stack	*cheapest_number;
 
-	cheapest_number = return_cheapest(b);
-	if (cheapest_number->above_median
-		&& cheapest_number->target_number->above_median)
-		rotate_both(a, b, cheapest_number, stack);
-	else if (!(cheapest_number->above_median)
-		&& !(cheapest_number->target_number->above_median))
-		reverse_rotate_both(a, b, cheapest_number, stack);
-	finish_rotation(b, cheapest_number, 'b', stack);
-	finish_rotation(a, cheapest_number->target_number, 'a', stack);
-	pa(stack);
-}
+// 	cheapest_number = return_cheapest(b);
+// 	if (cheapest_number->above_median
+// 		&& cheapest_number->target_number->above_median)
+// 		rotate_both(a, b, cheapest_number, stack);
+// 	else if (!(cheapest_number->above_median)
+// 		&& !(cheapest_number->target_number->above_median))
+// 		reverse_rotate_both(a, b, cheapest_number, stack);
+// 	finish_rotation(b, cheapest_number, 'b', stack);
+// 	finish_rotation(a, cheapest_number->target_number, 'a', stack);
+// 	pa(stack);
+// }
 
 t_stack	*find_smallest(t_stack *stack)
 {
@@ -284,35 +284,34 @@ void	init_numbers(t_stack *a, t_stack *b)
 	set_cheapest(b);
 }
 
-void	big_sort(t_list *stack)
+void	bigsort(t_stack *stack)
 {
 	t_stack *a;
 	t_stack	*b;
-	t_stack	*smallest;
+	// t_stack	*smallest;
 	int		len_a;
 
 	a = stack->a;
 	b = stack->b;
 	len_a = stack_len_bigsort(a);
-	if (len_a == 5)
-		tiny_sort_5(stack);
-	else
+	while (len_a-- > 5)
 	{
-		while (len_a-- > 3)
-			pb(stack);
+		pb(stack);
 	}
-	tiny_sort_3(stack);
+	tiny_sort_5(stack);
+	// print_stack(stack->a, 1);
+	// print_stack(stack->b, 2);
 	while (b)
 	{
 		init_numbers(a, b);
-		move_price(a, b, stack);
+		// move_price(a, b, stack);
 	}
 	set_current_pos(a);
-	smallest = find_smallest(a);
-	if (smallest->above_median)
-		while (a != smallest)
-			ra(stack);
-	else
-		while (a != smallest)
-			rra(stack);
+	// smallest = find_smallest(a);
+	// if (smallest->above_median)
+	// 	while (a != smallest)
+	// 		ra(stack);
+	// else
+	// 	while (a != smallest)
+	// 		rra(stack);
 }
