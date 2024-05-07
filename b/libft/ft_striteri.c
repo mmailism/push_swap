@@ -1,22 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print.c                                            :+:      :+:    :+:   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iammai <iammai@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kpueankl <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/06 16:46:22 by kpueankl          #+#    #+#             */
-/*   Updated: 2024/05/06 13:02:54 by iammai           ###   ########.fr       */
+/*   Created: 2023/08/25 15:20:21 by kpueankl          #+#    #+#             */
+/*   Updated: 2023/08/25 15:20:23 by kpueankl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./../include/push_swap.h"
+#include "libft.h"
 
-int	show_output(char *str, int show)
+void	ft_striteri(char *s, void (*f)(unsigned int, char*))
 {
-	if (show == 0)
-		return (1);
-	if (printf("%s", str) == -1)
-		return (-1);
-	return (1);
+	size_t	i;
+
+	if (!s)
+		return ;
+	i = 0;
+	while (s[i] != '\0')
+	{
+		f(i, s + i);
+		i++;
+	}
 }

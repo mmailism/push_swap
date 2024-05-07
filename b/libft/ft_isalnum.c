@@ -1,22 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print.c                                            :+:      :+:    :+:   */
+/*   ft_isalnum.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iammai <iammai@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kpueankl <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/06 16:46:22 by kpueankl          #+#    #+#             */
-/*   Updated: 2024/05/06 13:02:54 by iammai           ###   ########.fr       */
+/*   Created: 2023/08/25 15:02:05 by kpueankl          #+#    #+#             */
+/*   Updated: 2023/08/25 18:47:26 by kpueankl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./../include/push_swap.h"
+#include "libft.h"
 
-int	show_output(char *str, int show)
+int	ft_isalnum(int i)
 {
-	if (show == 0)
+	if ((i >= 65 && i <= 90) || (i >= 97 && i <= 122))
 		return (1);
-	if (printf("%s", str) == -1)
-		return (-1);
-	return (1);
+	else if (i >= 48 && i <= 57)
+		return (1);
+	return (0);
 }
+
+/*#include <stdio.h>
+
+int     main()
+{
+        printf("%d\n", ft_isalnum('+'));
+        return (0);
+}*/

@@ -1,22 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print.c                                            :+:      :+:    :+:   */
+/*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iammai <iammai@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kpueankl <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/06 16:46:22 by kpueankl          #+#    #+#             */
-/*   Updated: 2024/05/06 13:02:54 by iammai           ###   ########.fr       */
+/*   Created: 2023/08/25 15:05:29 by kpueankl          #+#    #+#             */
+/*   Updated: 2023/08/25 15:05:31 by kpueankl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./../include/push_swap.h"
+#include "libft.h"
+#include <stdlib.h>
 
-int	show_output(char *str, int show)
+int	ft_toupper(int ch)
 {
-	if (show == 0)
-		return (1);
-	if (printf("%s", str) == -1)
-		return (-1);
-	return (1);
+	if (ch >= 97 && ch <= 122)
+		return (ch - 32);
+	return (ch);
 }
+
+/*int main()
+{
+	char letter = 's';
+	printf("%d\n", ft_toupper(letter));
+	return 0;
+}*/

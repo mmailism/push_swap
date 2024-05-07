@@ -1,22 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print.c                                            :+:      :+:    :+:   */
+/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iammai <iammai@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kpueankl <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/06 16:46:22 by kpueankl          #+#    #+#             */
-/*   Updated: 2024/05/06 13:02:54 by iammai           ###   ########.fr       */
+/*   Created: 2023/08/25 15:20:33 by kpueankl          #+#    #+#             */
+/*   Updated: 2023/08/25 15:20:35 by kpueankl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./../include/push_swap.h"
+#include "libft.h"
 
-int	show_output(char *str, int show)
+void	ft_putchar_fd(char c, int fd)
 {
-	if (show == 0)
-		return (1);
-	if (printf("%s", str) == -1)
-		return (-1);
-	return (1);
+	write(fd, &c, 1);
 }

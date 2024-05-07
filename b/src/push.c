@@ -1,22 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print.c                                            :+:      :+:    :+:   */
+/*   push.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iammai <iammai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/06 16:46:22 by kpueankl          #+#    #+#             */
-/*   Updated: 2024/05/06 13:02:54 by iammai           ###   ########.fr       */
+/*   Created: 2023/08/25 15:19:07 by kpueankl          #+#    #+#             */
+/*   Updated: 2024/05/05 18:43:54 by iammai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./../include/push_swap.h"
 
-int	show_output(char *str, int show)
+void	pa(t_stack **stack_a, t_stack **stack_b, int j)
 {
-	if (show == 0)
-		return (1);
-	if (printf("%s", str) == -1)
-		return (-1);
-	return (1);
+	t_stack	*tmp;
+
+	if (!*stack_b)
+		return ;
+	tmp = *stack_a;
+	*stack_a = *stack_b;
+	*stack_b = (*stack_b)->next;
+	(*stack_a)->next = tmp;
+	if (j == 0)
+		write(1, "pa\n", 3);	
 }
+
+void	pb(t_stack **stack_a, t_stack **stack_b, int j)
+{
+	t_stack	*tmp;
+
+	tmp = *stack_b;
+	*stack_b = *stack_a;
+	*stack_a = (*stack_a)->next;
+	(*stack_b)->next = tmp;
+	if (j == 0)
+		write(1, "pb\n", 3);	
+}
+
