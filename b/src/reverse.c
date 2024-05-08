@@ -108,4 +108,3 @@ void	rrr(t_stack **stack_a, t_stack **stack_b, int j)
 	tmp->next = NULL;
 	rrr_second(stack_b, j);
 }
-

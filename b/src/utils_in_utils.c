@@ -1,37 +1,53 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push.c                                             :+:      :+:    :+:   */
+/*   utils_in_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iammai <iammai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 15:19:07 by kpueankl          #+#    #+#             */
-/*   Updated: 2024/05/09 00:41:15 by iammai           ###   ########.fr       */
+/*   Updated: 2024/05/09 00:17:47 by iammai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./../include/push_swap.h"
 
-void	pa(t_stack **stack_a, t_stack **stack_b, int j)
+void	ft_bzero(void *s, size_t n)
 {
-	t_stack	*tmp;
+	unsigned char	*i;
+	size_t			j;
 
-	tmp = *stack_a;
-	*stack_a = *stack_b;
-	*stack_b = (*stack_b)->next;
-	(*stack_a)->next = tmp;
-	if (j == 0)
-		write(1, "pa\n", 3);
+	i = s;
+	j = 0;
+	if (n == 0)
+		return ;
+	while (j < n)
+	{
+		i[j] = 0;
+		j++;
+	}
 }
 
-void	pb(t_stack **stack_a, t_stack **stack_b, int j)
+void	*ft_calloc(size_t count, size_t n)
 {
-	t_stack	*tmp;
+	void	*alt;
 
-	tmp = *stack_b;
-	*stack_b = *stack_a;
-	*stack_a = (*stack_a)->next;
-	(*stack_b)->next = tmp;
-	if (j == 0)
-		write(1, "pb\n", 3);
+	alt = (void *)malloc(count * n);
+	if (alt == NULL)
+		return (NULL);
+	ft_bzero(alt, (count * n));
+	return (alt);
+}
+
+size_t	ft_strlen(const char *str)
+{
+	size_t	i;
+
+	i = 0;
+	while (*str != '\0')
+	{
+		str++;
+		i++;
+	}
+	return (i);
 }

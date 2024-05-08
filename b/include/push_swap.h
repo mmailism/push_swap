@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: iammai <iammai@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/08 23:38:32 by iammai            #+#    #+#             */
+/*   Updated: 2024/05/09 01:09:40 by iammai           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
@@ -22,8 +34,6 @@ typedef struct s_stack
 	// struct s_stack	last;
 }	t_stack;
 
-void	pushswap_try(t_stack **stack_a);
-
 char	**ft_split(char const *s, char c);
 
 //swap.c
@@ -46,18 +56,17 @@ void	rrb(t_stack **stack_b, int j);
 void	rrr(t_stack **stack_a, t_stack **stack_b, int j);
 
 //main.c
-void	print_stack(t_stack **stack, int mode);
-void	error_free(t_stack *stack);
-int		is_sort(t_stack *stack_a);
 
 //stack.c
 void	stack_add_back(t_stack **stack, t_stack *stack_new);
 t_stack	*stack_new(int content);
 t_stack	*ft_lstlast(t_stack *lst);
 int		stack_size(t_stack *lst);
+int		is_sort(t_stack *stack_a);
 
 //stack_util.c
-int		atoi_pushswap(const char *str);
+int		atoi_pushswap(char *str, t_stack *stack);
+int		error_syntax(char *str_nbr);
 
 //tiny_sort.c
 void	tiny_sort_3(t_stack **stack_a);
@@ -66,39 +75,31 @@ void	tiny_sort_4(t_stack **stack_a, t_stack **stack_b);
 //tiny_sort_5.c
 void	tiny_sort_5(t_stack **stack_a, t_stack **stack_b);
 
+//tiny_sort_5_utils.c
+void	b1_less_all_a(t_stack **a, t_stack **b);
+void	b1_less_a2(t_stack **a, t_stack **b);
+void	b1_less_a3(t_stack **a, t_stack **b);
+void	b1_more_a3(t_stack **a, t_stack **b);
+
 //big_sort.c
-// void	push_swap(t_stack **stack_a);
-// int	ft_find_place_a(t_stack *stack_a, int nbr_push);
-int	ft_find_place_b(t_stack *stack_b, int nbr_push);
+int		ft_find_place_b(t_stack *stack_b, int nbr_push);
+void	pushswap(t_stack **stack_a);
 
 //big_sort_utils.c
-// void	ft_sort_b_till_3(t_stack **stack_a, t_stack **stack_b);
-int		ft_min(t_stack *a);
-int		ft_max(t_stack *a);
-int		ft_find_index(t_stack *a, int nbr);
-
-//case_a.c
-// int	ft_rotate_type_ab(t_stack *a, t_stack *b);
-// int	ft_case_rarb_a(t_stack *a, t_stack *b, int c);
-// int	ft_case_rrarrb_a(t_stack *a, t_stack *b, int c);
-// int	ft_case_rarrb_a(t_stack *a, t_stack *b, int c);
-// int	ft_case_rrarb_a(t_stack *a, t_stack *b, int c);
-
-//case_b.c
-// int	ft_rotate_type_ba(t_stack *a, t_stack *b);
-// int	ft_case_rarb(t_stack *a, t_stack *b, int c);
-// int	ft_case_rrarrb(t_stack *a, t_stack *b, int c);
-// int	ft_case_rrarb(t_stack *a, t_stack *b, int c);
-// int	ft_case_rarrb(t_stack *a, t_stack *b, int c);
-
-//apply.c
-// int	ft_apply_rarb(t_stack **a, t_stack **b, int c, char s);
-// int	ft_apply_rrarrb(t_stack **a, t_stack **b, int c, char s);
-// int	ft_apply_rrarb(t_stack **a, t_stack **b, int c, char s);
-// int	ft_apply_rarrb(t_stack **a, t_stack **b, int c, char s);
+int		find_min(t_stack *head);
+int		find_max(t_stack *head);
+int		find_mid(int min, int max);
+int		find_max_i(t_stack *copy, int max);
 
 //free.c
 void	error_free(t_stack *stack);
 void	free_stack(t_stack *stack);
+void	print_stack(t_stack **stack, int mode);
+void	ft_freestr(char **lst);
+
+//utils_in_utils.c
+void	ft_bzero(void *s, size_t n);
+void	*ft_calloc(size_t count, size_t n);
+size_t	ft_strlen(const char *str);
 
 #endif

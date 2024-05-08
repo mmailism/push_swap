@@ -2,5 +2,8 @@
     "workbench.colorCustomizations": {
         "tab.activeBorderTop": "#FA9E9E"
     },
-    "C_Cpp.errorSquiggles": "disabled"
+    "C_Cpp.errorSquiggles": "disabled",
+    "files.associations": {
+        "push_swap.h": "c"
+    }
 }

@@ -6,7 +6,7 @@
 /*   By: iammai <iammai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 16:46:22 by kpueankl          #+#    #+#             */
-/*   Updated: 2024/05/06 13:07:21 by iammai           ###   ########.fr       */
+/*   Updated: 2024/05/09 01:22:10 by iammai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,37 +19,47 @@ int	ft_isdigit(int c)
 	return (0);
 }
 
-static void	write_error(void)
+int	error_syntax(char *str_nbr)
 {
-	write(1, "Erorr\n", 6);
-	exit(1);
+	if (!(*str_nbr == '+' || *str_nbr == '-'
+			|| (*str_nbr >= '0' && *str_nbr <= '9')))
+		return (1);
+	if ((*str_nbr == '+' || *str_nbr == '-')
+		&& !(str_nbr[1] >= '0' && str_nbr[1] <= '9'))
+		return (1);
+	while (*++str_nbr)
+	{
+		if (!(*str_nbr >= '0' && *str_nbr <= '9'))
+			return (1);
+	}
+	return (0);
 }
 
-int	atoi_pushswap(const char *str)
+int	atoi_pushswap(char *str, t_stack *stack)
 {
-	int				mod;
-	long long int	i;
+	int			neg;
+	long long	res;
 
-	i = 0;
-	mod = 1;
-	while (*str == ' ' || *str == '\t' || *str == '\n' || *str == '\f'
-		|| *str == '\v' || *str == '\r')
-		str++;
-	if (*str == '-')
+	neg = 1;
+	res = 0;
+	if (*str == '\0')
+		error_free(stack);
+	if (*str == '-' || *str == '+')
 	{
-		mod = -1;
+		if (*(str + 1) < '0' || *(str + 1) > '9')
+			error_free(stack);
+		if (*str == '-')
+			neg = -1;
 		str++;
 	}
-	else if (*str == '+')
-		str++;
 	while (*str)
 	{
-		if (!ft_isdigit(*str))
-			write_error();
-		i = i * 10 + (*str - 48);
+		if ((*str < '0' || *str > '9'))
+			error_free(stack);
+		res = (*str - '0') + (res * 10);
+		if ((res * neg) < INT_MIN || (res * neg) > INT_MAX)
+			error_free(stack);
 		str++;
 	}
-	if ((mod * i) > 2147483647 || (mod * i) < -2147483648)
-		write_error();
-	return (mod * i);
+	return ((int)(res * neg));
 }

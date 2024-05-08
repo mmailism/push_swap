@@ -6,45 +6,11 @@
 /*   By: iammai <iammai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 16:46:22 by kpueankl          #+#    #+#             */
-/*   Updated: 2024/05/07 23:10:59 by iammai           ###   ########.fr       */
+/*   Updated: 2024/05/09 01:10:03 by iammai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./../include/push_swap.h"
-
-//! comment
-//? comment
-//* comment
-
-int	is_sort(t_stack *stack_a)
-{
-	int	i;
-
-	i = stack_a->nbr;
-	while (stack_a)
-	{
-		if (i > stack_a->nbr)
-			return (0);
-		i = stack_a->nbr;
-		stack_a = stack_a->next;
-	}
-	return (1);
-}
-
-void	ft_freestr(char **lst)
-{
-	char	*n1;
-
-	if (!lst)
-		return ;
-	while (*lst)
-	{
-		n1 = *lst;
-		lst++;
-		free(n1);
-	}
-	*lst = NULL;
-}
 
 t_stack	*ft_sub_process(char **argv)
 {
@@ -58,7 +24,9 @@ t_stack	*ft_sub_process(char **argv)
 	tmp = ft_split(argv[1], ' ');
 	while (tmp[i])
 	{
-		j = atoi_pushswap(tmp[i]);
+		if (error_syntax(tmp[i]))
+			error_free(a);
+		j = atoi_pushswap(tmp[i], a);
 		stack_add_back(&a, stack_new(j));
 		i++;
 	}
@@ -77,13 +45,15 @@ t_stack	*ft_process(int argc, char **argv)
 	a = NULL;
 	if (argc < 2)
 		error_free(a);
-	if (argc == 2)
+	else if (!argv[1][0])
+		error_free(a);
+	else if (argc == 2)
 		a = ft_sub_process(argv);
 	else
 	{
 		while (i < argc)
 		{
-			j = atoi_pushswap(argv[i]);
+			j = atoi_pushswap(argv[i], a);
 			stack_add_back(&a, stack_new(j));
 			i++;
 		}
@@ -109,19 +79,6 @@ static int	ft_checkdup(t_stack *a)
 	return (0);
 }
 
-int	stack_size(t_stack *lst)
-{
-	size_t	i;
-
-	i = 0;
-	while (lst)
-	{
-		lst = lst->next;
-		i++;
-	}
-	return (i);
-}
-
 void	ft_sorting(t_stack **stack_a)
 {
 	t_stack	*stack_b;
@@ -136,7 +93,7 @@ void	ft_sorting(t_stack **stack_a)
 	else if (stack_size(*stack_a) == 5)
 		tiny_sort_5(stack_a, &stack_b);
 	else
-		pushswap_try(stack_a);
+		pushswap(stack_a);
 	free(stack_b);
 }
 

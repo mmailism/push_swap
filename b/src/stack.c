@@ -42,3 +42,33 @@ t_stack	*stack_new(int content)
 	new->next = NULL;
 	return (new);
 }
+
+int	stack_size(t_stack *lst)
+{
+	size_t	i;
+
+	if (lst == NULL)
+		return (0);
+	i = 0;
+	while (lst)
+	{
+		++i;
+		lst = lst->next;
+	}
+	return (i);
+}
+
+int	is_sort(t_stack *stack_a)
+{
+	int	i;
+
+	i = stack_a->nbr;
+	while (stack_a)
+	{
+		if (i > stack_a->nbr)
+			return (0);
+		i = stack_a->nbr;
+		stack_a = stack_a->next;
+	}
+	return (1);
+}

@@ -10,6 +10,7 @@ VPATH = $(SRC_DIR)
 
 PUSH_SWAP_SRC	=	main.c \
 					utils.c \
+					utils_in_utils.c \
 					push.c \
 					reverse.c \
 					rotate.c \
@@ -19,9 +20,9 @@ PUSH_SWAP_SRC	=	main.c \
 					stack_utils.c \
 					sort_3.c \
 					tiny_sort_5.c \
+					tiny_sort_5_utils.c \
 					big_sort.c \
-					big_sort_utils.c \
-					try_b.c
+					big_sort_utils.c
 
 PUSH_SWAP_OBJ	=	$(PUSH_SWAP_SRC:%.c=obj/%.o)
 
