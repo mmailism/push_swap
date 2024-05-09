@@ -6,7 +6,7 @@
 /*   By: kpueankl <kpueankl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 16:46:22 by kpueankl          #+#    #+#             */
-/*   Updated: 2024/05/09 15:03:23 by kpueankl         ###   ########.fr       */
+/*   Updated: 2024/05/09 17:00:56 by kpueankl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ int	ft_isdigit(int c)
 
 int	error_syntax(char *str_nbr)
 {
+	if (*str_nbr == ' ')
+		return (1);
 	if (!(*str_nbr == '+' || *str_nbr == '-'
 			|| (*str_nbr >= '0' && *str_nbr <= '9')))
 		return (1);
@@ -30,7 +32,10 @@ int	error_syntax(char *str_nbr)
 	while (*++str_nbr)
 	{
 		if (!(*str_nbr >= '0' && *str_nbr <= '9'))
+		{
+			free(str_nbr);
 			return (1);
+		}
 	}
 	return (0);
 }
@@ -52,7 +57,7 @@ int	atoi_pushswap(char *str, t_stack *stack)
 			neg = -1;
 		str++;
 	}
-	while (*str)
+	while (*str != '\0')
 	{
 		if ((*str < '0' || *str > '9'))
 			error_free(stack);

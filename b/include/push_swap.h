@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iammai <iammai@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kpueankl <kpueankl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 23:38:32 by iammai            #+#    #+#             */
-/*   Updated: 2024/05/09 01:09:40 by iammai           ###   ########.fr       */
+/*   Updated: 2024/05/09 17:05:41 by kpueankl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ int		is_sort(t_stack *stack_a);
 //stack_util.c
 int		atoi_pushswap(char *str, t_stack *stack);
 int		error_syntax(char *str_nbr);
+char	**split_to_stack(t_stack *stack, char *str);
 
 //tiny_sort.c
 void	tiny_sort_3(t_stack **stack_a);
@@ -96,6 +97,7 @@ void	error_free(t_stack *stack);
 void	free_stack(t_stack *stack);
 void	print_stack(t_stack **stack, int mode);
 void	ft_freestr(char **lst);
+char	**free_split(char **data);
 
 //utils_in_utils.c
 void	ft_bzero(void *s, size_t n);

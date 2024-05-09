@@ -6,11 +6,18 @@
 /*   By: kpueankl <kpueankl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 16:46:22 by kpueankl          #+#    #+#             */
-/*   Updated: 2024/05/09 15:09:34 by kpueankl         ###   ########.fr       */
+/*   Updated: 2024/05/09 17:20:46 by kpueankl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./../include/push_swap.h"
+
+void	free_error_syntax(char **tmp, t_stack **a)
+{
+	ft_freestr(tmp);
+	free(tmp);
+	error_free(a);
+}
 
 t_stack	*ft_sub_process(char **argv)
 {
@@ -18,21 +25,22 @@ t_stack	*ft_sub_process(char **argv)
 	char	**tmp;
 	int		i;
 	int		j;
+	int		len_a;
 
 	a = NULL;
 	i = 0;
-	tmp = ft_split(argv[1], ' ');
-	while (tmp[i])
+	while (argv[++i] != NULL)
 	{
-		if (error_syntax(tmp[i]))
+		tmp = ft_split(argv[i], ' ');
+		j = -1;
+		while (tmp[++j] != NULL)
 		{
-			ft_freestr(tmp);
-			free(tmp);
-			error_free(a);
+			if (error_syntax(*argv))
+				free_error_syntax(a, tmp);
+			len_a = atoi_pushswap(tmp[j], a);
+			stack_add_back(&a, stack_new(len_a));
 		}
-		j = atoi_pushswap(tmp[i], a);
-		stack_add_back(&a, stack_new(j));
-		i++;
+		free_split(tmp);
 	}
 	ft_freestr(tmp);
 	free(tmp);
@@ -42,26 +50,18 @@ t_stack	*ft_sub_process(char **argv)
 t_stack	*ft_process(int argc, char **argv)
 {
 	t_stack	*a;
-	int		i;
-	int		j;
-
-	i = 1;
+	// int		i;
+	
+	// i = 0;
 	a = NULL;
 	if (argc < 2 || !argv[1][0])
 	{
 		free(a);
 		exit (0);
 	}
-	else if (argc == 2)
-		a = ft_sub_process(argv);
 	else
 	{
-		while (i < argc)
-		{
-			j = atoi_pushswap(argv[i], a);
-			stack_add_back(&a, stack_new(j));
-			i++;
-		}
+		a = ft_sub_process(argv);
 	}
 	return (a);
 }
