@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iammai <iammai@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kpueankl <kpueankl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 16:46:22 by kpueankl          #+#    #+#             */
-/*   Updated: 2024/05/09 01:10:03 by iammai           ###   ########.fr       */
+/*   Updated: 2024/05/09 15:09:34 by kpueankl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,11 @@ t_stack	*ft_sub_process(char **argv)
 	while (tmp[i])
 	{
 		if (error_syntax(tmp[i]))
+		{
+			ft_freestr(tmp);
+			free(tmp);
 			error_free(a);
+		}
 		j = atoi_pushswap(tmp[i], a);
 		stack_add_back(&a, stack_new(j));
 		i++;
@@ -43,10 +47,11 @@ t_stack	*ft_process(int argc, char **argv)
 
 	i = 1;
 	a = NULL;
-	if (argc < 2)
-		error_free(a);
-	else if (!argv[1][0])
-		error_free(a);
+	if (argc < 2 || !argv[1][0])
+	{
+		free(a);
+		exit (0);
+	}
 	else if (argc == 2)
 		a = ft_sub_process(argv);
 	else
