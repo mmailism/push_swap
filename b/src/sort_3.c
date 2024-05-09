@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sort_3.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iammai <iammai@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kpueankl <kpueankl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 15:19:07 by kpueankl          #+#    #+#             */
-/*   Updated: 2024/05/09 00:02:15 by iammai           ###   ########.fr       */
+/*   Updated: 2024/05/09 20:14:18 by kpueankl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,73 +34,26 @@ void	tiny_sort_3(t_stack **stack_a)
 	}
 }
 
-static void	sort4_pos2(t_stack **stack_a, t_stack **stack_b)
-{
-	if ((*stack_a)->nbr)
-	{
-		sa(stack_a, 0);
-		pb(stack_a, stack_b, 0);
-		tiny_sort_3(stack_a);
-		pa(stack_a, stack_b, 0);
-		ra(stack_a, 0);
-	}
-	else
-		return ;
-}
-
-static void	sort4_pos3(t_stack **stack_a, t_stack **stack_b)
-{
-	if ((*stack_a)->nbr)
-	{
-		rra(stack_a, 0);
-		rra(stack_a, 0);
-		pb(stack_a, stack_b, 0);
-		tiny_sort_3(stack_a);
-		pa(stack_a, stack_b, 0);
-		ra(stack_a, 0);
-	}
-	else
-		return ;
-}
-
-static void	sort4_pos4(t_stack **stack_a, t_stack **stack_b)
-{
-	if ((*stack_a)->nbr)
-	{
-		rra(stack_a, 0);
-		pb(stack_a, stack_b, 0);
-		tiny_sort_3(stack_a);
-		pa(stack_a, stack_b, 0);
-		ra(stack_a, 0);
-	}
-	else
-		return ;
-}
-
 void	tiny_sort_4(t_stack **stack_a, t_stack **stack_b)
 {
-	if ((*stack_a)->nbr > (*stack_a)->next->nbr
-		&& (*stack_a)->nbr > (*stack_a)->next->next->nbr
-		&& (*stack_a)->nbr > (*stack_a)->next->next->nbr
-		&& (*stack_a)->nbr > (*stack_a)->next->next->next->nbr)
+	if (!(is_sort(*stack_a)))
 	{
 		pb(stack_a, stack_b, 0);
 		tiny_sort_3(stack_a);
-		pa(stack_a, stack_b, 0);
-		ra(stack_a, 0);
+		if ((*stack_b)->nbr < (*stack_a)->nbr)
+			pa(stack_a, stack_b, 0);
+		if ((*stack_b) && (*stack_b)->nbr > (*stack_a)->next->next->nbr)
+		{
+			pa(stack_a, stack_b, 0);
+			ra(stack_a, 0);
+		}
+		while (*stack_b)
+		{
+			ra(stack_a, 0);
+			if ((*stack_b)->nbr < (*stack_a)->nbr)
+				pa(stack_a, stack_b, 0);
+		}
+		while (!is_sort(*stack_a))
+			ra(stack_a, 0);
 	}
-	else if ((*stack_a)->next->nbr > (*stack_a)->nbr
-		&& (*stack_a)->next->nbr > (*stack_a)->next->next->nbr
-		&& (*stack_a)->next->nbr > (*stack_a)->next->next->nbr)
-		sort4_pos2(stack_a, stack_b);
-	else if ((*stack_a)->next->next->nbr > (*stack_a)->nbr
-		&& (*stack_a)->next->next->nbr > (*stack_a)->next->nbr
-		&& (*stack_a)->next->next->nbr > (*stack_a)->next->next->next->nbr)
-		sort4_pos3(stack_a, stack_b);
-	else if ((*stack_a)->next->next->next->nbr > (*stack_a)->nbr
-		&& (*stack_a)->next->next->next->nbr > (*stack_a)->next->nbr
-		&& (*stack_a)->next->next->next->nbr > (*stack_a)->next->next->nbr)
-		sort4_pos4(stack_a, stack_b);
-	else
-		return ;
 }

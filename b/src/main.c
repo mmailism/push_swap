@@ -6,18 +6,11 @@
 /*   By: kpueankl <kpueankl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 16:46:22 by kpueankl          #+#    #+#             */
-/*   Updated: 2024/05/09 19:16:04 by kpueankl         ###   ########.fr       */
+/*   Updated: 2024/05/09 20:12:48 by kpueankl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./../include/push_swap.h"
-
-void	free_error_syntax(char **tmp, t_stack *a)
-{
-	ft_freestr(tmp);
-	free(tmp);
-	error_free(a);
-}
 
 t_stack	*ft_sub_process(char **argv)
 {
@@ -25,7 +18,6 @@ t_stack	*ft_sub_process(char **argv)
 	char	**tmp;
 	int		i;
 	int		j;
-	int		len_a;
 
 	a = NULL;
 	i = 0;
@@ -41,23 +33,17 @@ t_stack	*ft_sub_process(char **argv)
 				free(tmp);
 				error_free(a);
 			}
-			// printf("here\n");
-			len_a = atoi_pushswap(tmp[j], a);
-			stack_add_back(&a, stack_new(len_a));
+			stack_add_back(&a, stack_new(atoi_pushswap(tmp[j], a)));
 		}
 		free_split(tmp);
 	}
-	// ft_freestr(tmp);
-	// free(tmp);
 	return (a);
 }
 
 t_stack	*ft_process(int argc, char **argv)
 {
 	t_stack	*a;
-	// int		i;
-	
-	// i = 0;
+
 	a = NULL;
 	if (argc < 2)
 	{
