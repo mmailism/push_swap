@@ -6,11 +6,21 @@
 /*   By: kpueankl <kpueankl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 16:46:22 by kpueankl          #+#    #+#             */
-/*   Updated: 2024/05/09 20:12:48 by kpueankl         ###   ########.fr       */
+/*   Updated: 2024/05/09 20:30:45 by kpueankl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./../include/push_swap.h"
+
+void	check_error_syntax(char *tmp, t_stack *a)
+{
+	if (error_syntax(tmp))
+	{
+		ft_freestr(&tmp);
+		free(tmp);
+		error_free(a);
+	}
+}
 
 t_stack	*ft_sub_process(char **argv)
 {
@@ -24,15 +34,12 @@ t_stack	*ft_sub_process(char **argv)
 	while (argv[++i] != NULL)
 	{
 		tmp = ft_split(argv[i], ' ');
+		if (tmp[0] == NULL)
+			error_free(a);
 		j = -1;
 		while (tmp[++j] != NULL)
 		{
-			if (error_syntax(tmp[j]))
-			{
-				ft_freestr(tmp);
-				free(tmp);
-				error_free(a);
-			}
+			check_error_syntax(tmp[j], a);
 			stack_add_back(&a, stack_new(atoi_pushswap(tmp[j], a)));
 		}
 		free_split(tmp);
