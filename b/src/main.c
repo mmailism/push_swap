@@ -6,13 +6,13 @@
 /*   By: kpueankl <kpueankl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 16:46:22 by kpueankl          #+#    #+#             */
-/*   Updated: 2024/05/09 17:20:46 by kpueankl         ###   ########.fr       */
+/*   Updated: 2024/05/09 19:16:04 by kpueankl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./../include/push_swap.h"
 
-void	free_error_syntax(char **tmp, t_stack **a)
+void	free_error_syntax(char **tmp, t_stack *a)
 {
 	ft_freestr(tmp);
 	free(tmp);
@@ -35,15 +35,20 @@ t_stack	*ft_sub_process(char **argv)
 		j = -1;
 		while (tmp[++j] != NULL)
 		{
-			if (error_syntax(*argv))
-				free_error_syntax(a, tmp);
+			if (error_syntax(tmp[j]))
+			{
+				ft_freestr(tmp);
+				free(tmp);
+				error_free(a);
+			}
+			// printf("here\n");
 			len_a = atoi_pushswap(tmp[j], a);
 			stack_add_back(&a, stack_new(len_a));
 		}
 		free_split(tmp);
 	}
-	ft_freestr(tmp);
-	free(tmp);
+	// ft_freestr(tmp);
+	// free(tmp);
 	return (a);
 }
 
@@ -54,15 +59,13 @@ t_stack	*ft_process(int argc, char **argv)
 	
 	// i = 0;
 	a = NULL;
-	if (argc < 2 || !argv[1][0])
+	if (argc < 2)
 	{
 		free(a);
 		exit (0);
 	}
 	else
-	{
 		a = ft_sub_process(argv);
-	}
 	return (a);
 }
 

@@ -1,5 +1,5 @@
 NAME 			= push_swap
-CC 				= gcc
+CC 				= cc
 CFLAGS			= -Wall -Werror -Wextra -Iinclude -Ilibft
 LIBFT_DIR		= libft
 LIBFT_FILE		= $(LIBFT_DIR)/libft.a

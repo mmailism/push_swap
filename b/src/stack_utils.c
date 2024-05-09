@@ -6,7 +6,7 @@
 /*   By: kpueankl <kpueankl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 16:46:22 by kpueankl          #+#    #+#             */
-/*   Updated: 2024/05/09 17:00:56 by kpueankl         ###   ########.fr       */
+/*   Updated: 2024/05/09 19:09:56 by kpueankl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,7 @@ int	error_syntax(char *str_nbr)
 	while (*++str_nbr)
 	{
 		if (!(*str_nbr >= '0' && *str_nbr <= '9'))
-		{
-			free(str_nbr);
 			return (1);
-		}
 	}
 	return (0);
 }
